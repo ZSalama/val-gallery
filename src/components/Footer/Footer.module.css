@@ -1,0 +1,46 @@
+.footer {
+    background-color: var(--Feldgrau);
+    color: var(--nav-background);
+    padding: 20px 0;
+    text-align: center;
+    width: 100%;
+    margin-top: auto; /* Ensures the footer is pushed to the bottom */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.links {
+    margin-bottom: 20px;
+}
+
+.link {
+    /* color: var(--nav-background); */
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
+}
+
+.social {
+    margin-bottom: 20px;
+}
+
+.socialLink {
+    color: var(--link-color);
+    margin: 0 10px;
+    text-decoration: none;
+}
+
+.socialLink:hover {
+    text-decoration: underline;
+}
+
+.copyright {
+    font-size: 14px;
+}
