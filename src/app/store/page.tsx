@@ -10,7 +10,8 @@ import styles from './page.module.css'
 // }
 
 export default function Store() {
-    const { state, dispatch } = useCart()
+    // const { state, dispatch } = useCart()
+    const { dispatch } = useCart()
 
     const addItemToCart = (item: CartItem) => {
         dispatch({ type: 'add', payload: item })

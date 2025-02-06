@@ -14,7 +14,6 @@ if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
     )
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function Store() {
@@ -29,7 +28,7 @@ export default function Store() {
 
         if (query.get('canceled')) {
             console.log(
-                'Order canceled -- continue to shop around and checkout when you’re ready.'
+                'Order canceled -- continue to shop around and checkout when you are ready.'
             )
             redirect('/canceled')
         }
