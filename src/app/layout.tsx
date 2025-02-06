@@ -4,7 +4,7 @@ import './globals.css'
 import Navbar from '@/components/Navbar/Navbar'
 import Footer from '@/components/Footer/Footer'
 import Image from 'next/image'
-import background from '@/media/horse.jpg'
+import { CartProvider } from '@/context/CartContext'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -31,18 +31,20 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <Navbar />
-                <div className='backgroundImageContainer'>
-                    <Image
-                        src={background}
-                        alt='Background'
-                        fill={true}
-                        quality={100}
-                        style={{ zIndex: -1, objectFit: 'cover' }}
-                    />
-                </div>
-                {children}
-                <Footer />
+                <CartProvider>
+                    <Navbar />
+                    <div className='backgroundImageContainer'>
+                        <Image
+                            src='/media/horse.jpg'
+                            alt='Background'
+                            fill={true}
+                            quality={100}
+                            style={{ zIndex: -1, objectFit: 'cover' }}
+                        />
+                    </div>
+                    {children}
+                    <Footer />
+                </CartProvider>
             </body>
         </html>
     )

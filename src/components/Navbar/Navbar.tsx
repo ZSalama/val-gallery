@@ -130,6 +130,18 @@ const Navbar = () => {
                                 Contact Us
                             </Link>
                         </li>
+                        <li>
+                            <Link
+                                href='/cart'
+                                className={
+                                    pathname === '/cart'
+                                        ? styles.activeLink + ' ' + styles.link
+                                        : styles.link
+                                }
+                            >
+                                Cart
+                            </Link>
+                        </li>
                         {/* <li>
                             <Link
                                 href='/blog'

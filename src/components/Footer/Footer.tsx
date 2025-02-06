@@ -18,8 +18,7 @@ const Footer = () => {
                     </Link>
                 </div>
                 <div className={styles.copyright}>
-                    &copy; {new Date().getFullYear()} Tacos. All rights
-                    reserved.
+                    &copy; {new Date().getFullYear()} VAB. All rights reserved.
                 </div>
             </div>
         </footer>
