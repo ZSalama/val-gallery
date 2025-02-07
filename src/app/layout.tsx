@@ -4,7 +4,9 @@ import './globals.css'
 import Navbar from '@/components/Navbar/Navbar'
 import Footer from '@/components/Footer/Footer'
 import Image from 'next/image'
-import { CartProvider } from '@/context/CartContext'
+
+// no longer using context for cart - now using sessionstorage
+// import { CartProvider } from '@/context/CartContext'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -31,20 +33,20 @@ export default function RootLayout({
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <CartProvider>
-                    <Navbar />
-                    <div className='backgroundImageContainer'>
-                        <Image
-                            src='/media/horse.jpg'
-                            alt='Background'
-                            fill={true}
-                            quality={100}
-                            style={{ zIndex: -1, objectFit: 'cover' }}
-                        />
-                    </div>
-                    {children}
-                    <Footer />
-                </CartProvider>
+                {/* <CartProvider> */}
+                <Navbar />
+                <div className='backgroundImageContainer'>
+                    <Image
+                        src='/media/horse.jpg'
+                        alt='Background'
+                        fill={true}
+                        quality={100}
+                        style={{ zIndex: -1, objectFit: 'cover' }}
+                    />
+                </div>
+                {children}
+                <Footer />
+                {/* </CartProvider> */}
             </body>
         </html>
     )

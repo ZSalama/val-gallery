@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
-import { CartItem } from '@/context/CartContext'
+import type { CartItem } from '@/hooks/cartHooks'
 
 if (!process.env.STRIPE_SECRET_KEY) {
     throw new Error('STRIPE_SECRET_KEY is not set in environment variables')
@@ -18,7 +18,7 @@ export default async function handler(
             return res.status(400).json({ error: 'Invalid items' })
         }
         const lineItems = items.map((item) => ({
-            price: item.price,
+            price: item.id,
             quantity: item.quantity,
         }))
 

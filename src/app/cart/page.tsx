@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
-import { useCart } from '@/context/CartContext'
+import useCart from '@/hooks/cartHooks'
 import { redirect } from 'next/navigation'
 import styles from './page.module.css'
 
@@ -16,8 +16,9 @@ if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
 
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
-export default function Store() {
-    const { state, dispatch } = useCart()
+export default function Cart() {
+    const { cart, removeItemFromCart, clearCart } = useCart()
+
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout
         const query = new URLSearchParams(window.location.search)
@@ -45,7 +46,7 @@ export default function Store() {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ items: state.items }),
+            body: JSON.stringify({ items: cart }),
         })
 
         const session = await response.json()
@@ -57,26 +58,21 @@ export default function Store() {
         }
     }
 
-    const clearCart = () => {
-        dispatch({ type: 'clear' })
-    }
-
-    console.log('on load console log')
-    console.log(state.items)
     return (
         <>
             <div className={styles.cart}>
                 <h2>Cart Items</h2>
-                {state.items.length > 0 ? (
-                    <ul>
-                        {state.items.map((item) => (
-                            <li key={item.price}>
-                                <p>{item.name}</p>
-                                <p>Quantity: {item.quantity}</p>
-                                <p>Price: ${(item.cost / 100).toFixed(2)}</p>
-                            </li>
-                        ))}
-                    </ul>
+                {cart.length > 0 ? (
+                    cart.map((item) => (
+                        <div key={item.id}>
+                            <p>
+                                {item.name} - {item.quantity} x ${item.cost}
+                            </p>
+                            <button onClick={() => removeItemFromCart(item.id)}>
+                                Remove
+                            </button>
+                        </div>
+                    ))
                 ) : (
                     <p>Your cart is empty</p>
                 )}
@@ -85,7 +81,7 @@ export default function Store() {
                 <button onClick={handleCheckout}>Checkout</button>
             </section>
             <div>
-                <button onClick={clearCart}>Clear Cart</button>
+                <button onClick={() => clearCart()}>Clear Cart</button>
             </div>
         </>
     )

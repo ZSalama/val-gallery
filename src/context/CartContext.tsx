@@ -1,75 +1,77 @@
-'use client'
+// this file is currently not in use
 
-import React, { createContext, useContext, useReducer, ReactNode } from 'react'
+// 'use client'
 
-export interface CartItem {
-    price: string //id
-    name?: string //product name
-    cost: number
-    description?: string
-    quantity: number
-}
+// import React, { createContext, useContext, useReducer, ReactNode } from 'react'
 
-interface CartState {
-    items: CartItem[]
-}
+// export interface CartItem {
+//     price: string //id
+//     name?: string //product name
+//     cost: number
+//     description?: string
+//     quantity: number
+// }
 
-interface CartAction {
-    type: string
-    payload?: CartItem
-}
+// interface CartState {
+//     items: CartItem[]
+// }
 
-const initialState: CartState = {
-    items: [],
-}
+// interface CartAction {
+//     type: string
+//     payload?: CartItem
+// }
 
-const CartContext = createContext<
-    { state: CartState; dispatch: React.Dispatch<CartAction> } | undefined
->(undefined)
+// const initialState: CartState = {
+//     items: [],
+// }
 
-function cartReducer(state: CartState, action: CartAction): CartState {
-    if (!action.payload && action.type !== 'clear') {
-        return state
-    }
-    switch (action.type) {
-        case 'add':
-            console.log('added item to cart')
-            console.log(state.items)
-            return {
-                ...state,
-                items: [...state.items, action.payload!],
-            }
-        case 'remove':
-            return {
-                items: state.items.filter(
-                    (item) =>
-                        action.payload && item.price !== action.payload.price
-                ),
-            }
-        case 'clear':
-            console.log('cart cleared')
-            return {
-                items: [],
-            }
-        default:
-            return state
-    }
-}
+// const CartContext = createContext<
+//     { state: CartState; dispatch: React.Dispatch<CartAction> } | undefined
+// >(undefined)
 
-export const CartProvider = ({ children }: { children: ReactNode }) => {
-    const [state, dispatch] = useReducer(cartReducer, initialState)
+// function cartReducer(state: CartState, action: CartAction): CartState {
+//     if (!action.payload && action.type !== 'clear') {
+//         return state
+//     }
+//     switch (action.type) {
+//         case 'add':
+//             console.log('added item to cart')
+//             console.log(state.items)
+//             return {
+//                 ...state,
+//                 items: [...state.items, action.payload!],
+//             }
+//         case 'remove':
+//             return {
+//                 items: state.items.filter(
+//                     (item) =>
+//                         action.payload && item.price !== action.payload.price
+//                 ),
+//             }
+//         case 'clear':
+//             console.log('cart cleared')
+//             return {
+//                 items: [],
+//             }
+//         default:
+//             return state
+//     }
+// }
 
-    return (
-        <CartContext.Provider value={{ state, dispatch }}>
-            {children}
-        </CartContext.Provider>
-    )
-}
+// export const CartProvider = ({ children }: { children: ReactNode }) => {
+//     const [state, dispatch] = useReducer(cartReducer, initialState)
 
-export const useCart = () => {
-    const context = useContext(CartContext)
-    if (!context) {
-        throw new Error('useCart must be used within a CartProvider')
-    }
-    return context
-}
+//     return (
+//         <CartContext.Provider value={{ state, dispatch }}>
+//             {children}
+//         </CartContext.Provider>
+//     )
+// }
+
+// export const useCart = () => {
+//     const context = useContext(CartContext)
+//     if (!context) {
+//         throw new Error('useCart must be used within a CartProvider')
+//     }
+//     return context
+// }
