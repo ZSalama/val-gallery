@@ -9,15 +9,15 @@ export type CartItem = {
 
 export default function useCart() {
     // hydration error if attempting to load cart without checking for empty cart
-    const [cart, setCart] = useState<CartItem[]>(() => {
-        if (typeof window !== 'undefined') {
-          const storedCart = sessionStorage.getItem('cart');
-          return storedCart ? JSON.parse(storedCart) : [];
-        }
-        return [];
-      });
+    const [cart, setCart] = useState<CartItem[]>([])
 
-    // Save the cart to session storage whenever it changes
+    useEffect(() => {
+        const storedCart = sessionStorage.getItem('cart');
+        if (storedCart) {
+          setCart(JSON.parse(storedCart));
+        }
+      }, []);
+
     useEffect(() => {
         sessionStorage.setItem('cart', JSON.stringify(cart))
     }, [cart])

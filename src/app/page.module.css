@@ -11,10 +11,12 @@
     font-size: 3em;
     font-weight: bold;
     margin-right: 1rem;
+    text-align: center;
 }
 
 .subtitle {
     margin-right: 1rem;
+    text-align: center;
 }
 
 .hero_buttons {
