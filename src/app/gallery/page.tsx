@@ -1,6 +1,7 @@
 // import React from 'react'
 import styles from './page.module.css'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Gallery() {
     return (
@@ -9,7 +10,10 @@ export default function Gallery() {
 
             <div className={styles.wrapper}>
                 <div className={styles.grid_wrapper_vertical}>
-                    <div className={styles.image_container}>
+                    <Link
+                        href='/gallery/lizard'
+                        className={styles.image_container}
+                    >
                         <Image
                             className={styles.image}
                             src='/media/snake.jpg'
@@ -17,8 +21,24 @@ export default function Gallery() {
                             width={720}
                             height={960}
                         />
-                    </div>
-                    <div className={styles.image_container}>
+                    </Link>
+
+                    <Link
+                        href='/gallery/lizard'
+                        className={styles.image_container}
+                    >
+                        <Image
+                            className={styles.image}
+                            src='/media/lizard.jpg'
+                            alt='Picture of the snake'
+                            width={720}
+                            height={960}
+                        />
+                    </Link>
+                    <Link
+                        href='/gallery/lizard'
+                        className={styles.image_container}
+                    >
                         <Image
                             className={styles.image}
                             src='/media/snake.jpg'
@@ -26,19 +46,13 @@ export default function Gallery() {
                             width={720}
                             height={960}
                         />
-                    </div>
-                    <div className={styles.image_container}>
-                        <Image
-                            className={styles.image}
-                            src='/media/snake.jpg'
-                            alt='Picture of the snake'
-                            width={720}
-                            height={960}
-                        />
-                    </div>
+                    </Link>
                 </div>
                 <div className={styles.grid_wrapper_horizontal}>
-                    <div className={styles.image_container}>
+                    <Link
+                        href='/gallery/lizard'
+                        className={styles.image_container}
+                    >
                         <Image
                             className={styles.image}
                             src='/media/flower_white.jpg'
@@ -46,8 +60,11 @@ export default function Gallery() {
                             width={960}
                             height={720}
                         />
-                    </div>
-                    <div className={styles.image_container}>
+                    </Link>
+                    <Link
+                        href='/gallery/lizard'
+                        className={styles.image_container}
+                    >
                         <Image
                             className={styles.image}
                             src='/media/flower_white.jpg'
@@ -55,7 +72,7 @@ export default function Gallery() {
                             width={960}
                             height={720}
                         />
-                    </div>
+                    </Link>
                 </div>
             </div>
         </div>
