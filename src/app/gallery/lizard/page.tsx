@@ -1,4 +1,5 @@
 // import React from 'react'
+'use client'
 import styles from './../items.module.css'
 import Image from 'next/image'
 import {
@@ -8,30 +9,65 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from '@/components/ui/carousel'
+import { useEffect, useState } from 'react'
 
 export default function Lizard() {
+    const [ImageOne, setImageOne] = useState<string | null>(null)
+    const [ImageTwo, setImageTwo] = useState<string | null>(null)
+
+    useEffect(() => {
+        async function ImageOne() {
+            try {
+                const res = await fetch('/api/get-signed-url?key=lizard.jpg')
+                const data = await res.json()
+                setImageOne(data.url)
+            } catch (error) {
+                console.error('Failed to fetch signed URL', error)
+            }
+        }
+
+        ImageOne()
+    }, [])
+
+    useEffect(() => {
+        async function ImageTwo() {
+            try {
+                const res = await fetch('/api/get-signed-url?key=horse_red.jpg')
+                const data = await res.json()
+                setImageTwo(data.url)
+            } catch (error) {
+                console.error('Failed to fetch signed URL', error)
+            }
+        }
+        ImageTwo()
+    }, [])
+
     return (
         <div className={styles.gallery_wrapper}>
             <div className={styles.carousel}>
                 <Carousel>
                     <CarouselContent>
                         <CarouselItem>
-                            <Image
-                                src='/media/lizard.jpg'
-                                alt='Lizard'
-                                width={500}
-                                height={500}
-                                className={styles.image}
-                            />
+                            {ImageOne && (
+                                <Image
+                                    src={ImageOne}
+                                    alt='Lizard'
+                                    width={500}
+                                    height={500}
+                                    className={styles.image}
+                                />
+                            )}
                         </CarouselItem>
                         <CarouselItem>
-                            <Image
-                                src='/media/lizard.jpg'
-                                alt='Lizard'
-                                width={500}
-                                height={500}
-                                className={styles.image}
-                            />
+                            {ImageTwo && (
+                                <Image
+                                    src={ImageTwo}
+                                    alt='Horse'
+                                    width={500}
+                                    height={500}
+                                    className={styles.image}
+                                />
+                            )}
                         </CarouselItem>
                     </CarouselContent>
                     <CarouselPrevious />
