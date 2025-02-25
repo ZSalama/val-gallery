@@ -32,18 +32,18 @@ export default function RootLayout({
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
                 <CartProvider>
-                <Navbar />
-                <div className='backgroundImageContainer'>
-                    <Image
-                        src='/media/horse.jpg'
-                        alt='Background'
-                        fill={true}
-                        quality={100}
-                        style={{ zIndex: -1, objectFit: 'cover' }}
-                    />
-                </div>
-                {children}
-                <Footer />
+                    <Navbar />
+                    <div className='backgroundImageContainer'>
+                        <Image
+                            src='/media/horse.jpg'
+                            alt='Background'
+                            fill={true}
+                            quality={100}
+                            style={{ zIndex: -1, objectFit: 'cover' }}
+                        />
+                    </div>
+                    {children}
+                    {/* <Footer /> */}
                 </CartProvider>
             </body>
         </html>

@@ -23,6 +23,9 @@ importers:
       '@stripe/stripe-js':
         specifier: ^5.6.0
         version: 5.6.0
+      aws-cloudfront-sign:
+        specifier: ^3.0.2
+        version: 3.0.2
       aws-sdk:
         specifier: ^2.1692.0
         version: 2.1692.0
@@ -1045,6 +1048,10 @@ packages:
   available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
     engines: {node: '>= 0.4'}
+
+  aws-cloudfront-sign@3.0.2:
+    resolution: {integrity: sha512-Z/yOGZ3Hd1rhYbY13mtRiLCbCDC1Xf/v+dQUyUwMLnyunD/nfDZd/2LMZ9MKxxOhVb2RzEmEwY0F9f+riPaSWQ==}
+    engines: {node: '>=18'}
 
   aws-sdk@2.1692.0:
     resolution: {integrity: sha512-x511uiJ/57FIsbgUe5csJ13k3uzu25uWQE+XqfBis/sB0SFoiElJWXRkgEAUh0U6n40eT3ay5Ue4oPkRMu1LYw==}
@@ -4104,6 +4111,8 @@ snapshots:
   available-typed-arrays@1.0.7:
     dependencies:
       possible-typed-array-names: 1.0.0
+
+  aws-cloudfront-sign@3.0.2: {}
 
   aws-sdk@2.1692.0:
     dependencies:
