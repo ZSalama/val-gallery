@@ -1,51 +1,36 @@
-'use client'
-import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import styles from './../items.module.css'
 
 export default function Gallery() {
-    const [images, setImages] = useState<string[]>([])
-
-    useEffect(() => {
-        async function fetchImages() {
-            try {
-                const res = await fetch('/api/list-images')
-                const data = await res.json()
-                setImages(data.images)
-            } catch (error) {
-                console.error('Error fetching images:', error)
-            }
-        }
-        fetchImages()
-    }, [])
-
-    const horse_image = images.filter(
-        (url) =>
-            url ===
-            'https://val-gallery.s3.us-east-1.amazonaws.com/horse_red.jpg'
-    )
+    const images = [
+        'https://d2oeo8w8j25w98.cloudfront.net/horse_red.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/tree_2.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/lizard.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/flower_green.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/flower_white.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/tree_3.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/horse_gallery.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/butterfly.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/egg.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/humming_bird.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/bamboo.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/flower_yellow.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/wheel.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/model_2.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/tree_1.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/model_1.jpg',
+        'https://d2oeo8w8j25w98.cloudfront.net/snake.jpg',
+    ]
 
     return (
         <div>
-            {/*{images.map((url, index) => ( // display all images
-                <div key={index}>
-                    <Image
-                        src={url}
-                        alt={`Image ${index}`}
-                        width={500}
-                        height={500}
-                    />
-                    <p>Image {url}</p>
-                </div>
-            ))} */}
-            {horse_image.length > 0 &&
-                horse_image[0] && ( //display specific image
-                    <Image
-                        src={horse_image[0]}
-                        alt={`Image ${horse_image[0]}`}
-                        width={500}
-                        height={500}
-                    />
-                )}
+            <Image
+                src={images[0]}
+                alt='Lizard'
+                width={720}
+                height={960}
+                className={styles.image}
+            />
         </div>
     )
 }

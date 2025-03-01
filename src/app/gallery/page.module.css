@@ -10,14 +10,16 @@
     text-align: center;
     padding-top: 5rem;
     padding-bottom: 4rem;
-    color: var(--gallery-background);
+    color: white;
 }
 
 .wrapper {
-    padding: 10rem;
+    display: flex;
     padding-top: 5rem;
     text-align: center;
-    background-color: var(--gallery-background);
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .grid_wrapper_vertical {
@@ -25,8 +27,9 @@
     flex-direction: row;
     justify-content: center;
     gap: 5rem;
-    margin-bottom: 5rem;
     align-items: center;
+    max-width: 50rem;
+    margin-top: 5rem;
 }
 
 .grid_wrapper_horizontal {
@@ -35,42 +38,65 @@
     justify-content: center;
     align-items: center;
     gap: 8rem;
+    max-width: 40rem;
     /* margin: 0 auto; */
+    margin-top: 5rem;
 }
 
 .image_container {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-    min-width: 20rem;
-    max-width: 25rem;
-    /* aspect-ratio: 3/4; */
+    position: relative;
+    z-index: 3;
+}
+/* .image_overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 2;
+    pointer-events: auto; 
+} 
+*/
+
+.image_link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* Ensure it is above the image */
+}
+
+.image_wrapper {
+    position: relative;
+    display: flex;
+    width: 100%;
+    height: 100%;
+    z-index: 0; /* Ensure it is below the link */
+    padding-top: 5rem;
 }
 
 .image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    padding: 1rem;
+    ointer-events: none; /* Prevent the image from intercepting mouse events */
 }
 
 @media screen and (max-width: 1200px) {
     .wrapper {
-        padding: 5rem;
     }
 
     .grid_wrapper_vertical,
     .grid_wrapper_horizontal {
         flex-direction: column;
-        gap: 5%;
-        margin-bottom: revert;
     }
 
     .image_container {
-        margin: 2rem;
         max-width: 35rem;
     }
 }
