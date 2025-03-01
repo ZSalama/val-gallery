@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar/Navbar'
-import Footer from '@/components/Footer/Footer'
+// import Footer from '@/components/Footer/Footer'
 import Image from 'next/image'
 import { CartProvider } from '@/context/CartContext'
 
@@ -35,7 +35,7 @@ export default function RootLayout({
                     <Navbar />
                     <div className='backgroundImageContainer'>
                         <Image
-                            src='/media/horse.jpg'
+                            src='https://d2oeo8w8j25w98.cloudfront.net/horse_gallery.jpg'
                             alt='Background'
                             fill={true}
                             quality={100}

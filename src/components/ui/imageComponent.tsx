@@ -1,7 +1,6 @@
-'use client'
 import Image from 'next/image'
 import Link from 'next/link'
-import styles from '../../app/gallery/items.module.css'
+import styles from '../../app/gallery/page.module.css'
 
 type GalleryImageLinkProps = {
     src: string
@@ -25,7 +24,6 @@ export default function GalleryImageLink({
                 width={width}
                 height={height}
                 loading='lazy'
-                onContextMenu={(e) => e.preventDefault()} // Prevent right-click
             />
             <Link href='gallery/lizard' className={styles.image_link}>
                 <div className={styles.image_overlay}></div>

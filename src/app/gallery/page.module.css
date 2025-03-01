@@ -15,7 +15,6 @@
 
 .wrapper {
     display: flex;
-    padding-top: 5rem;
     text-align: center;
     justify-content: center;
     align-items: center;
@@ -28,8 +27,8 @@
     justify-content: center;
     gap: 5rem;
     align-items: center;
-    max-width: 50rem;
-    margin-top: 5rem;
+    margin-bottom: 4rem;
+    max-width: 70rem;
 }
 
 .grid_wrapper_horizontal {
@@ -38,9 +37,8 @@
     justify-content: center;
     align-items: center;
     gap: 8rem;
-    max-width: 40rem;
-    /* margin: 0 auto; */
-    margin-top: 5rem;
+    margin-bottom: 4rem;
+    max-width: 60rem;
 }
 
 .image_container {
@@ -50,17 +48,6 @@
     position: relative;
     z-index: 3;
 }
-/* .image_overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0);
-    z-index: 2;
-    pointer-events: auto; 
-} 
-*/
 
 .image_link {
     position: absolute;
@@ -77,14 +64,12 @@
     width: 100%;
     height: 100%;
     z-index: 0; /* Ensure it is below the link */
-    padding-top: 5rem;
 }
 
 .image {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    ointer-events: none; /* Prevent the image from intercepting mouse events */
 }
 
 @media screen and (max-width: 1200px) {
@@ -94,9 +79,11 @@
     .grid_wrapper_vertical,
     .grid_wrapper_horizontal {
         flex-direction: column;
+        gap: 0rem;
+        margin-bottom: 0rem;
     }
 
-    .image_container {
-        max-width: 35rem;
+    .image_wrapper {
+        padding: 2.5rem;
     }
 }
