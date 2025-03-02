@@ -12,11 +12,11 @@ export default function useCart() {
     const [cart, setCart] = useState<CartItem[]>([])
 
     useEffect(() => {
-        const storedCart = sessionStorage.getItem('cart');
+        const storedCart = sessionStorage.getItem('cart')
         if (storedCart) {
-          setCart(JSON.parse(storedCart));
+            setCart(JSON.parse(storedCart))
         }
-      }, []);
+    }, [])
 
     useEffect(() => {
         sessionStorage.setItem('cart', JSON.stringify(cart))

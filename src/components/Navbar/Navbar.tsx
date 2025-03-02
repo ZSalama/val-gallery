@@ -3,10 +3,12 @@ import Link from 'next/link'
 import React, { useState } from 'react'
 import styles from './Navbar.module.css'
 import { usePathname } from 'next/navigation'
+import { useCartContext } from '@/context/CartContext'
 // import Logo from '../../components/Logo/Logo'
 
 const Navbar = () => {
     const [style, setStyle] = useState(false)
+    const { cart } = useCartContext()
 
     const openSidebar = () => {
         // console.log(style)
@@ -131,16 +133,33 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            <Link
-                                href='/cart'
-                                className={
-                                    pathname === '/cart'
-                                        ? styles.activeLink + ' ' + styles.link
-                                        : styles.link
-                                }
-                            >
-                                Cart
-                            </Link>
+                            {cart.length === 0 ? (
+                                <Link
+                                    href='/cart'
+                                    className={
+                                        pathname === '/cart'
+                                            ? styles.activeLink +
+                                              ' ' +
+                                              styles.link
+                                            : styles.link
+                                    }
+                                >
+                                    Cart
+                                </Link>
+                            ) : (
+                                <Link
+                                    href='/cart'
+                                    className={
+                                        pathname === '/cart'
+                                            ? styles.activeLink +
+                                              ' ' +
+                                              styles.link
+                                            : styles.link
+                                    }
+                                >
+                                    Cart ({cart.length})
+                                </Link>
+                            )}
                         </li>
                         {/* <li>
                             <Link

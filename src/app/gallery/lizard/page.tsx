@@ -9,6 +9,14 @@ import {
     CarouselNext,
     CarouselPrevious,
 } from '@/components/ui/carousel'
+import AddItemToCard from '@/components/ui/AddItemToCard'
+
+const item = {
+    id: 'price_1Qy6BDGhmoGg54MoimANPWwm',
+    name: 'Lizard',
+    cost: 30000,
+    quantity: 1,
+}
 
 export default function Lizard() {
     return (
@@ -65,6 +73,7 @@ export default function Lizard() {
                     Reprehenderit, architecto. Quisquam temporibus sint
                     repellat, voluptatum tempora vel ea aliquid et.
                 </p>
+                <AddItemToCard item={item} />
             </div>
         </div>
     )

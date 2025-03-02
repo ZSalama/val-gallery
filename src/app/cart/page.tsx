@@ -4,7 +4,7 @@ import { useEffect } from 'react'
 import { loadStripe } from '@stripe/stripe-js'
 import { redirect } from 'next/navigation'
 import styles from './page.module.css'
-import { useCartContext } from "@/context/CartContext";
+import { useCartContext } from '@/context/CartContext'
 
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
@@ -17,8 +17,7 @@ if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function Cart() {
-    const { cart, removeItemFromCart, clearCart } = useCartContext();
-
+    const { cart, removeItemFromCart, clearCart } = useCartContext()
 
     useEffect(() => {
         // Check to see if this is a redirect back from Checkout
@@ -66,8 +65,8 @@ export default function Cart() {
                 {cart.length === 0 ? (
                     <p>Your cart is empty</p>
                 ) : (
-                    cart.map((item) => (
-                        <div key={item.id}>
+                    cart.map((item, index) => (
+                        <div key={index}>
                             <p>
                                 {item.name} - {item.quantity} x ${item.cost}
                             </p>

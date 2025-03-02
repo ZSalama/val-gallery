@@ -74,16 +74,19 @@
 
 @media screen and (max-width: 1200px) {
     .wrapper {
+        /* margin: 0; */
     }
 
     .grid_wrapper_vertical,
     .grid_wrapper_horizontal {
         flex-direction: column;
-        gap: 0rem;
-        margin-bottom: 0rem;
+        margin-bottom: 0;
+        max-width: 90vh;
+        gap: 3rem;
+        margin: 2rem 2rem 2rem 2rem;
+        /* margin-bottom: 3rem; */
     }
 
     .image_wrapper {
-        padding: 2.5rem;
     }
 }
