@@ -7,7 +7,7 @@ type GalleryImageLinkProps = {
     alt: string
     width: number
     height: number
-    loading: 'lazy' | 'eager' | 'auto'
+    loading?: 'eager' | 'lazy'
 }
 
 export default function GalleryImageLink({
