@@ -26,6 +26,7 @@ export default function GalleryImageLink({
                 width={width}
                 height={height}
                 loading={loading}
+                quality={75}
             />
             <Link
                 href='gallery/lizard'
