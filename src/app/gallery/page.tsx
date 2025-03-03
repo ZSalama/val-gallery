@@ -84,6 +84,7 @@ export default function Gallery() {
                     fill={true}
                     quality={100}
                     style={{ zIndex: -1, objectFit: 'cover' }}
+                    loading='eager'
                 />
             </div>
             <h1 className={styles.title}>Gallery</h1>
@@ -95,12 +96,14 @@ export default function Gallery() {
                         alt={images[0].title}
                         width={960}
                         height={720}
+                        loading='eager'
                     />
                     <GalleryImageLink
                         src={images[1].src}
                         alt={images[1].title}
                         width={960}
                         height={720}
+                        loading='eager'
                     />
                 </div>
                 <div className={styles.grid_wrapper_horizontal}>
@@ -109,12 +112,14 @@ export default function Gallery() {
                         alt={images[2].title}
                         width={960}
                         height={720}
+                        loading='eager'
                     />
                     <GalleryImageLink
                         src={images[3].src}
                         alt={images[3].title}
                         width={960}
                         height={720}
+                        loading='eager'
                     />
                 </div>
                 <div className={styles.grid_wrapper_vertical}>
@@ -123,18 +128,21 @@ export default function Gallery() {
                         alt={images[4].title}
                         width={720}
                         height={960}
+                        loading='lazy'
                     />
                     <GalleryImageLink
                         src={images[5].src}
                         alt={images[5].title}
                         width={720}
                         height={960}
+                        loading='lazy'
                     />
                     <GalleryImageLink
                         src={images[6].src}
                         alt={images[6].title}
                         width={720}
                         height={960}
+                        loading='lazy'
                     />
                 </div>
                 <div className={styles.grid_wrapper_horizontal}>
@@ -143,12 +151,14 @@ export default function Gallery() {
                         alt={images[7].title}
                         width={960}
                         height={720}
+                        loading='lazy'
                     />
                     <GalleryImageLink
                         src={images[8].src}
                         alt={images[8].title}
                         width={960}
                         height={720}
+                        loading='lazy'
                     />
                 </div>
                 <div className={styles.grid_wrapper_horizontal}>
@@ -157,12 +167,14 @@ export default function Gallery() {
                         alt={images[9].title}
                         width={960}
                         height={720}
+                        loading='lazy'
                     />
                     <GalleryImageLink
                         src={images[10].src}
                         alt={images[10].title}
                         width={960}
                         height={720}
+                        loading='lazy'
                     />
                 </div>
                 <div className={styles.grid_wrapper_vertical}>
@@ -171,18 +183,21 @@ export default function Gallery() {
                         alt={images[11].title}
                         width={720}
                         height={960}
+                        loading='lazy'
                     />
                     <GalleryImageLink
                         src={images[12].src}
                         alt={images[12].title}
                         width={720}
                         height={960}
+                        loading='lazy'
                     />
                     <GalleryImageLink
                         src={images[13].src}
                         alt={images[13].title}
                         width={720}
                         height={960}
+                        loading='lazy'
                     />
                 </div>
                 <div className={styles.grid_wrapper_horizontal}>
@@ -191,12 +206,14 @@ export default function Gallery() {
                         alt={images[14].title}
                         width={960}
                         height={720}
+                        loading='lazy'
                     />
                     <GalleryImageLink
                         src={images[15].src}
                         alt={images[15].title}
                         width={960}
                         height={720}
+                        loading='lazy'
                     />
                 </div>
             </div>

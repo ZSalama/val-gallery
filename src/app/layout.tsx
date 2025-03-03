@@ -17,8 +17,8 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-    title: 'Photo Gallery',
-    description: 'A place to purchase beautiful photos',
+    title: 'Art Gallery',
+    description: 'A place to purchase beautiful art',
 }
 
 export default function RootLayout({

@@ -4,10 +4,11 @@
 /* @import 'shadcn/dist/shadcn.css'; */
 
 :root {
-    --nav-background: #5d737e; /*  payne's gray */
-    --nav-foreground: #64b6ac; /* Verdigris */
-    --nav-active: #c0fdfb; /* Light blue */
+    --nav-background: #1a202c; /*  payne's gray */
+    --nav-foreground: #2a4365; /* Verdigris */
+    --nav-active: #90cdf4; /* Light blue */
     --gallery-background: rgb(32, 32, 32);
+    --nav-text: #e2e8f0;
     display: flex;
     flex-direction: column;
     min-height: 100%;

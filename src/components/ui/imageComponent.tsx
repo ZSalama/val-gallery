@@ -7,6 +7,7 @@ type GalleryImageLinkProps = {
     alt: string
     width: number
     height: number
+    loading: 'lazy' | 'eager' | 'auto'
 }
 
 export default function GalleryImageLink({
@@ -14,6 +15,7 @@ export default function GalleryImageLink({
     alt,
     width,
     height,
+    loading = 'lazy',
 }: GalleryImageLinkProps) {
     return (
         <div className={styles.image_wrapper}>
@@ -23,7 +25,7 @@ export default function GalleryImageLink({
                 alt={alt}
                 width={width}
                 height={height}
-                loading='lazy'
+                loading={loading}
             />
             <Link href='gallery/lizard' className={styles.image_link}>
                 <div className={styles.image_overlay}></div>

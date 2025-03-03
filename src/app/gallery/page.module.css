@@ -8,9 +8,9 @@
     font-size: 3em;
     font-weight: bold;
     text-align: center;
-    padding-top: 5rem;
-    padding-bottom: 4rem;
-    color: white;
+    margin-top: 8rem;
+    /* padding-bottom: 4rem; */
+    color: var(--nav-text);
 }
 
 .wrapper {
@@ -19,6 +19,7 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin-top: 2rem;
 }
 
 .grid_wrapper_vertical {
@@ -70,6 +71,12 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+@media screen and (max-width: 800px) {
+    .title {
+        margin-top: 6rem;
+    }
 }
 
 @media screen and (max-width: 1200px) {

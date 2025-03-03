@@ -2,13 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 5rem;
-    min-height: 100vh;
-
-    background-image: url('https://d2oeo8w8j25w98.cloudfront.net/starry_background.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Keeps it fixed on scroll */
+    /* padding-top: 5rem; */
+    margin-top: 4rem;
 }
 
 .image_wrapper {
@@ -50,21 +45,30 @@
     flex: 3;
     /* max-width: 50%; */
     padding: 1rem 2rem 2rem 2rem;
-    margin-top: 0rem;
+    margin: 1rem;
     color: white;
     max-width: max(75%, 25rem);
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 1.5rem;
+    border-radius: 2rem;
 }
 
 .blurb {
     text-align: left;
 }
 
-@media screen and (min-width: 1020px) {
+@media screen and (min-width: 800px) {
+    .gallery_wrapper {
+        margin-top: 6rem;
+    }
+}
+
+@media screen and (min-width: 1200px) {
     .gallery_wrapper {
         flex-direction: row;
         justify-content: center;
         align-items: normal;
-        padding-top: 0rem;
+        padding-top: 5rem;
         padding-bottom: 10rem;
         min-height: calc(100vh - 9vh);
     }
@@ -73,22 +77,19 @@
         flex: 1;
         max-width: 25rem;
         min-width: 20rem;
-        /* padding-top: 4rem;
-        padding-left: 0rem;
-        padding-right: 1rem;
-        padding-bottom: 0rem; */
-        padding: 4rem 2rem 0rem 0rem;
-        margin-right: 3rem;
+        height: 100%;
+        /* padding: 4rem 2rem 0rem 0rem;
+        margin-right: 3rem; */
     }
 
     .carousel {
         flex: 1;
-        padding-top: 4rem;
+        /* padding-top: 4rem; */
         margin-right: 5rem;
         margin-left: 5rem;
         margin: 0rem 4rem 1rem 4rem;
         max-width: 43rem;
-        /* max-height: 50rem; */
+
         aspect-ratio: 1/1;
     }
 }
