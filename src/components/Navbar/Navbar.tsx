@@ -14,14 +14,20 @@ const Navbar = () => {
 
     const openSidebar = () => {
         // console.log(style)
-        setStyle(!style)
+        setStyle((prev) => !prev)
     }
     // Scroll behavior: Show navbar when scrolling up, hide when scrolling down
     useEffect(() => {
+        let timeout: NodeJS.Timeout
         const handleScroll = () => {
-            const currentScrollY = window.scrollY
-            setShowNavbar(currentScrollY < lastScrollY || currentScrollY < 50)
-            setLastScrollY(currentScrollY)
+            clearTimeout(timeout)
+            timeout = setTimeout(() => {
+                const currentScrollY = window.scrollY
+                setShowNavbar(
+                    currentScrollY < lastScrollY || currentScrollY < 50
+                )
+                setLastScrollY(currentScrollY)
+            }, 10) // Debounce to reduce re-renders
         }
 
         window.addEventListener('scroll', handleScroll)
@@ -35,6 +41,7 @@ const Navbar = () => {
             <button
                 className={styles.style + ' ' + styles.menu_open_button}
                 onClick={() => openSidebar()}
+                aria-label='Open navigation'
             >
                 <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -54,6 +61,7 @@ const Navbar = () => {
                         : styles.overlay
                 }
                 onClick={() => openSidebar()}
+                aria-hidden='true'
             ></div>
             {/* navbar */}
             <div
@@ -78,6 +86,7 @@ const Navbar = () => {
                                     styles.link + ' ' + styles.menu_close_button
                                 }
                                 onClick={() => openSidebar()}
+                                aria-label='Close navigation'
                             >
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
@@ -98,6 +107,8 @@ const Navbar = () => {
                                         ? styles.activeLink + ' ' + styles.link
                                         : styles.link
                                 }
+                                aria-label='Home'
+                                prefetch={true}
                             >
                                 Home
                             </Link>
@@ -110,6 +121,8 @@ const Navbar = () => {
                                         ? styles.activeLink + ' ' + styles.link
                                         : styles.link
                                 }
+                                aria-label='Gallery'
+                                prefetch={true}
                             >
                                 Gallery
                             </Link>
@@ -122,6 +135,8 @@ const Navbar = () => {
                                         ? styles.activeLink + ' ' + styles.link
                                         : styles.link
                                 }
+                                aria-label='About'
+                                prefetch={true}
                             >
                                 About
                             </Link>
@@ -134,6 +149,8 @@ const Navbar = () => {
                                         ? styles.activeLink + ' ' + styles.link
                                         : styles.link
                                 }
+                                aria-label='Contact Us'
+                                prefetch={true}
                             >
                                 Contact Us
                             </Link>
@@ -149,6 +166,8 @@ const Navbar = () => {
                                               styles.link
                                             : styles.link
                                     }
+                                    aria-label='Cart'
+                                    prefetch={true}
                                 >
                                     Cart
                                 </Link>
@@ -162,6 +181,8 @@ const Navbar = () => {
                                               styles.link
                                             : styles.link
                                     }
+                                    aria-hidden='true'
+                                    prefetch={true}
                                 >
                                     Cart ({cart.length})
                                 </Link>

@@ -27,7 +27,11 @@ export default function GalleryImageLink({
                 height={height}
                 loading={loading}
             />
-            <Link href='gallery/lizard' className={styles.image_link}>
+            <Link
+                href='gallery/lizard'
+                className={styles.image_link}
+                aria-label={`link to ${alt} page`}
+            >
                 <div className={styles.image_overlay}></div>
             </Link>
         </div>
