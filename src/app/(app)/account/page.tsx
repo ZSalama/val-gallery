@@ -8,11 +8,14 @@ const prisma = new PrismaClient()
 
 export const revalidate = 60 // Page regenerates every 60 seconds
 
+const cookie_name = process.env.BETTER_COOKIE_NAME
+
 export default async function Account() {
     //get auth cookie from user
 
     const userCookies = await cookies()
-    const userId = userCookies.get('better-auth.session_token')?.value
+    if (!cookie_name) return <div>Environment not set: BETTER_COOKIE_NAME</div>
+    const userId = userCookies.get(cookie_name)?.value
     if (!userId) return <div>User session not found</div>
     const newUserId = userId.split('.')[0] //split cookie to get session token to match in db
 
