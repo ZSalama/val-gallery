@@ -4,16 +4,19 @@ import React, { useState, useEffect } from 'react'
 import styles from './Navbar.module.css'
 import { usePathname } from 'next/navigation'
 import { useCartContext } from '@/context/CartContext'
-// import Logo from '../../components/Logo/Logo'
+import { authClient } from '@/lib/auth-client'
 
 const Navbar = () => {
-    const [style, setStyle] = useState(false)
     const { cart } = useCartContext()
+    const pathname = usePathname()
+    const [style, setStyle] = useState(false)
     const [lastScrollY, setLastScrollY] = useState(0)
     const [showNavbar, setShowNavbar] = useState(true)
+    const [loading, setLoading] = useState(true)
+    const [error, setError] = useState<string | null>(null)
+    const [loggedIn, setLoggedIn] = useState(false)
 
     const openSidebar = () => {
-        // console.log(style)
         setStyle((prev) => !prev)
     }
     // Scroll behavior: Show navbar when scrolling up, hide when scrolling down
@@ -34,7 +37,35 @@ const Navbar = () => {
         return () => window.removeEventListener('scroll', handleScroll)
     }, [lastScrollY])
 
-    const pathname = usePathname()
+    useEffect(() => {
+        const getSession = async () => {
+            try {
+                const { data: session, error } = await authClient.getSession()
+                if (error) {
+                    setError('User session not found')
+                    setLoading(false)
+                    return
+                }
+                // console.log(session)
+                if (session) {
+                    setLoggedIn(true)
+                }
+            } finally {
+                setLoading(false)
+            }
+        }
+
+        getSession()
+    }, [])
+
+    if (loading) {
+        return <div>Loading...</div>
+    }
+
+    if (error) {
+        return <div>{error}</div>
+    }
+
     return (
         <>
             {/* open button */}
@@ -108,7 +139,6 @@ const Navbar = () => {
                                         : styles.link
                                 }
                                 aria-label='Home'
-                                prefetch={true}
                             >
                                 Home
                             </Link>
@@ -122,7 +152,6 @@ const Navbar = () => {
                                         : styles.link
                                 }
                                 aria-label='Gallery'
-                                prefetch={true}
                             >
                                 Gallery
                             </Link>
@@ -136,24 +165,40 @@ const Navbar = () => {
                                         : styles.link
                                 }
                                 aria-label='About'
-                                prefetch={true}
                             >
                                 About
                             </Link>
                         </li>
                         <li>
-                            <Link
-                                href='/contact'
-                                className={
-                                    pathname === '/contact'
-                                        ? styles.activeLink + ' ' + styles.link
-                                        : styles.link
-                                }
-                                aria-label='Contact Us'
-                                prefetch={true}
-                            >
-                                Contact Us
-                            </Link>
+                            {loggedIn ? (
+                                <Link
+                                    href='/account'
+                                    className={
+                                        pathname === '/account'
+                                            ? styles.activeLink +
+                                              ' ' +
+                                              styles.link
+                                            : styles.link
+                                    }
+                                    aria-label='Account'
+                                >
+                                    Account
+                                </Link>
+                            ) : (
+                                <Link
+                                    href='/account/login'
+                                    className={
+                                        pathname === '/account/login'
+                                            ? styles.activeLink +
+                                              ' ' +
+                                              styles.link
+                                            : styles.link
+                                    }
+                                    aria-label='Login'
+                                >
+                                    Log in
+                                </Link>
+                            )}
                         </li>
                         <li>
                             {cart.length === 0 ? (
@@ -167,7 +212,6 @@ const Navbar = () => {
                                             : styles.link
                                     }
                                     aria-label='Cart'
-                                    prefetch={true}
                                 >
                                     Cart
                                 </Link>
@@ -182,7 +226,6 @@ const Navbar = () => {
                                             : styles.link
                                     }
                                     aria-hidden='true'
-                                    prefetch={true}
                                 >
                                     Cart ({cart.length})
                                 </Link>

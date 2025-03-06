@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import styles from '../../app/gallery/page.module.css'
+import styles from '../../app/(app)/gallery/page.module.css'
 
 type GalleryImageLinkProps = {
     src: string

@@ -33,15 +33,6 @@ export default function RootLayout({
             >
                 <CartProvider>
                     <Navbar />
-                    <div className='backgroundImageContainer'>
-                        <Image
-                            src='https://d2oeo8w8j25w98.cloudfront.net/horse_gallery.jpg'
-                            alt='Background'
-                            fill={true}
-                            quality={100}
-                            style={{ zIndex: -1, objectFit: 'cover' }}
-                        />
-                    </div>
                     {children}
                     {/* <Footer /> */}
                 </CartProvider>

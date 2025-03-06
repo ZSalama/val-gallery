@@ -1,7 +1,4 @@
-// import React from 'react'
 import styles from './page.module.css'
-import Image from 'next/image'
-// import Link from 'next/link'
 import GalleryImageLink from '@/components/ui/imageComponent'
 
 export type GalleryImage = { title: string; src: string }
@@ -77,18 +74,7 @@ export default function Gallery() {
 
     return (
         <div className={styles.gallery_container}>
-            <div className='backgroundImageContainer'>
-                <Image
-                    src='https://d2oeo8w8j25w98.cloudfront.net/starry_background.png'
-                    alt='Background'
-                    fill={true}
-                    quality={100}
-                    style={{ zIndex: -1, objectFit: 'cover' }}
-                    loading='eager'
-                />
-            </div>
             <h1 className={styles.title}>Gallery</h1>
-
             <div className={styles.wrapper}>
                 <div className={styles.grid_wrapper_horizontal}>
                     <GalleryImageLink
@@ -103,7 +89,7 @@ export default function Gallery() {
                         alt={images[1].title}
                         width={960}
                         height={720}
-                        loading='eager'
+                        loading='lazy'
                     />
                 </div>
                 <div className={styles.grid_wrapper_horizontal}>
@@ -112,14 +98,14 @@ export default function Gallery() {
                         alt={images[2].title}
                         width={960}
                         height={720}
-                        loading='eager'
+                        loading='lazy'
                     />
                     <GalleryImageLink
                         src={images[3].src}
                         alt={images[3].title}
                         width={960}
                         height={720}
-                        loading='eager'
+                        loading='lazy'
                     />
                 </div>
                 <div className={styles.grid_wrapper_vertical}>

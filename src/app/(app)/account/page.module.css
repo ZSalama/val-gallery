@@ -1,0 +1,40 @@
+.wrapper {
+    margin-top: 5rem;
+    color: var(--nav-text);
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem;
+}
+
+.content {
+    padding: 05px 20px 20px 20px;
+    margin-top: 0px;
+    text-align: center;
+}
+
+.button {
+    padding: 0.8rem 0.8rem;
+    font-size: 1em;
+    font-weight: bold;
+    /* color: var(--nav-active); */
+    color: var(--nav-text);
+    background-color: var(--nav-background);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    padding: 1rem;
+    margin-top: 1rem;
+}

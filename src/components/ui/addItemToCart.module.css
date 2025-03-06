@@ -1,0 +1,28 @@
+.add-to-cart {
+    background-color: #ff9900; /* Amazon-style orange */
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.add-to-cart:hover {
+    background-color: #e68a00;
+}
+
+.add-to-cart:active {
+    transform: scale(0.95);
+}
+
+.add-to-cart:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

@@ -56,7 +56,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* Ensure it is above the image */
+    z-index: 2; /* Ensure it is above the image */
 }
 
 .image_wrapper {
@@ -64,7 +64,7 @@
     display: flex;
     width: 100%;
     height: 100%;
-    z-index: 0; /* Ensure it is below the link */
+    z-index: 1; /* Ensure it is below the link */
 }
 
 .image {
@@ -89,7 +89,7 @@
         flex-direction: column;
         margin-bottom: 0;
         max-width: 90vh;
-        gap: 3rem;
+        gap: 4rem;
         margin: 2rem 2rem 2rem 2rem;
         /* margin-bottom: 3rem; */
     }
