@@ -3,6 +3,7 @@ import styles from './page.module.css'
 import Link from 'next/link'
 import { cookies } from 'next/headers'
 import { PrismaClient } from '@prisma/client'
+import SignOutButton from '@/components/SignOutButton/SignOutButton'
 
 const prisma = new PrismaClient()
 
@@ -48,9 +49,7 @@ export default async function Account() {
                             Change delivery address
                         </button>
                     </Link>
-                    <Link href='/account/logout'>
-                        <button className={styles.button}>Logout</button>
-                    </Link>
+                    <SignOutButton />
                 </div>
             </div>
         </div>

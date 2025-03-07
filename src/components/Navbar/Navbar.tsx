@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import styles from './Navbar.module.css'
 import { usePathname } from 'next/navigation'
 import { useCartContext } from '@/context/CartContext'
-import { authClient } from '@/lib/auth-client'
+import { useAuth } from '@/context/AuthContext'
 
 const Navbar = () => {
     const { cart } = useCartContext()
@@ -12,9 +12,7 @@ const Navbar = () => {
     const [style, setStyle] = useState(false)
     const [lastScrollY, setLastScrollY] = useState(0)
     const [showNavbar, setShowNavbar] = useState(true)
-    const [loading, setLoading] = useState(true)
-    const [error, setError] = useState<string | null>(null)
-    const [loggedIn, setLoggedIn] = useState(false)
+    const { loggedIn } = useAuth()
 
     const openSidebar = () => {
         setStyle((prev) => !prev)
@@ -36,35 +34,6 @@ const Navbar = () => {
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [lastScrollY])
-
-    useEffect(() => {
-        const getSession = async () => {
-            try {
-                const { data: session, error } = await authClient.getSession()
-                if (error) {
-                    setError('User session not found')
-                    setLoading(false)
-                    return
-                }
-                // console.log(session)
-                if (session) {
-                    setLoggedIn(true)
-                }
-            } finally {
-                setLoading(false)
-            }
-        }
-
-        getSession()
-    }, [])
-
-    if (loading) {
-        return <div>Loading...</div>
-    }
-
-    if (error) {
-        return <div>{error}</div>
-    }
 
     return (
         <>
