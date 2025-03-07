@@ -1,0 +1,12 @@
+.wrapper {
+    margin: 5rem;
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    font-size: 3em;
+    font-weight: bold;
+    text-align: center;
+    padding: 1rem;
+}

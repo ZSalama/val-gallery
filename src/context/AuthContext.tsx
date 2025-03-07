@@ -13,7 +13,6 @@ import { authClient } from '@/lib/auth-client'
 interface AuthContextType {
     session: boolean
     loading: boolean
-    login: () => void
     logout: () => void
 }
 
@@ -46,12 +45,8 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         setSession(false)
     }
 
-    const login = async () => {
-        setSession(true) // Update session state on successful login
-    }
-
     return (
-        <AuthContext.Provider value={{ session, loading, login, logout }}>
+        <AuthContext.Provider value={{ session, loading, logout }}>
             {children}
         </AuthContext.Provider>
     )

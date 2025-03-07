@@ -102,17 +102,35 @@ const Navbar = () => {
                             </button>
                         </li>
                         <li className={styles.home_link}>
-                            <Link
-                                href='/'
-                                className={
-                                    pathname === '/'
-                                        ? styles.activeLink + ' ' + styles.link
-                                        : styles.link
-                                }
-                                aria-label='Home'
-                            >
-                                Home
-                            </Link>
+                            {pathname?.includes('/admin') ? (
+                                <Link
+                                    href='/admin'
+                                    className={
+                                        pathname === '/'
+                                            ? styles.activeLink +
+                                              ' ' +
+                                              styles.link
+                                            : styles.link
+                                    }
+                                    aria-label='Home'
+                                >
+                                    Home
+                                </Link>
+                            ) : (
+                                <Link
+                                    href='/'
+                                    className={
+                                        pathname === '/'
+                                            ? styles.activeLink +
+                                              ' ' +
+                                              styles.link
+                                            : styles.link
+                                    }
+                                    aria-label='Home'
+                                >
+                                    Home
+                                </Link>
+                            )}
                         </li>
                         <li>
                             <Link
