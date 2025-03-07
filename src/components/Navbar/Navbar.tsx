@@ -12,7 +12,9 @@ const Navbar = () => {
     const [style, setStyle] = useState(false)
     const [lastScrollY, setLastScrollY] = useState(0)
     const [showNavbar, setShowNavbar] = useState(true)
-    const { loggedIn } = useAuth()
+    const { session, loading } = useAuth()
+
+    // if (loading) return null
 
     const openSidebar = () => {
         setStyle((prev) => !prev)
@@ -139,7 +141,7 @@ const Navbar = () => {
                             </Link>
                         </li>
                         <li>
-                            {loggedIn ? (
+                            {session ? (
                                 <Link
                                     href='/account'
                                     className={

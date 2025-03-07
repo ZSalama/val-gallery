@@ -1,41 +1,63 @@
 'use client'
-import React, { createContext, useContext, useEffect, useState } from 'react'
 
-type AuthContextType = {
-    loggedIn: boolean
-    setLoggedIn: (value: boolean) => void
+import {
+    createContext,
+    useContext,
+    useEffect,
+    useState,
+    ReactNode,
+} from 'react'
+import { authClient } from '@/lib/auth-client'
+
+// Define the shape of AuthContext
+interface AuthContextType {
+    session: boolean
+    loading: boolean
+    login: () => void
+    logout: () => void
 }
 
-const AuthContext = createContext<AuthContextType | undefined>(undefined)
+// Create context with a default value matching AuthContextType
+const AuthContext = createContext<AuthContextType | null>(null)
 
-export const AuthProvider = ({
-    children,
-    initialLoggedIn,
-}: {
-    children: React.ReactNode
-    initialLoggedIn: boolean
-}) => {
-    const [loggedIn, setLoggedIn] = useState(initialLoggedIn)
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+    const [session, setSession] = useState(false)
+    const [loading, setLoading] = useState(true)
 
-    // useEffect(() => {
-    //     const checkAuth = async () => {
-    //         const userCookies = await cookies()
-    //         const authCookie = userCookies.get(process.env.BETTER_COOKIE_NAME!)
-    //         if (authCookie) {
-    //             setLoggedIn(true)
-    //         }
-    //     }
+    // Fetch session on mount
+    useEffect(() => {
+        const fetchSession = async () => {
+            try {
+                const { data } = await authClient.getSession()
+                setSession(!!data) // Set session based on data presence
+            } catch (error) {
+                console.error('Failed to fetch session:', error)
+            } finally {
+                setLoading(false)
+            }
+        }
 
-    //     checkAuth()
-    // }, [])
+        fetchSession()
+    }, [])
+
+    // Logout function
+    const logout = async () => {
+        // await authClient.signOut()
+        setSession(false)
+    }
+
+    const login = async () => {
+        setSession(true) // Update session state on successful login
+    }
 
     return (
-        <AuthContext.Provider value={{ loggedIn, setLoggedIn }}>
+        <AuthContext.Provider value={{ session, loading, login, logout }}>
             {children}
         </AuthContext.Provider>
     )
 }
 
+// Hook to use the auth context
 export const useAuth = () => {
     const context = useContext(AuthContext)
     if (!context) {

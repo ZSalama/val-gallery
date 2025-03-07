@@ -5,11 +5,11 @@ import { useAuth } from '@/context/AuthContext'
 
 export default function SignOutButton() {
     const router = useRouter()
-    const { setLoggedIn } = useAuth()
+    const { logout } = useAuth() //  Use the hook at the top level
 
     const handleSignOut = async () => {
         await signOut() // Ensure sign-out completes before redirecting
-        setLoggedIn(false) // Update auth state
+        logout() //  Call the logout function from context
         router.refresh()
         router.push('/') // Redirect to home page
     }

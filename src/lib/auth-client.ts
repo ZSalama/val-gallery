@@ -9,5 +9,6 @@ export const signIn = async () => {
 }
 
 export const signOut = async () => {
+    // useAuth().logout()
     await authClient.signOut()
 }

@@ -5,7 +5,6 @@ import Navbar from '@/components/Navbar/Navbar'
 // import Footer from '@/components/Footer/Footer'
 import { CartProvider } from '@/context/CartContext'
 import { AuthProvider } from '@/context/AuthContext'
-import { getAuthStatus } from '@/lib/auth'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -22,18 +21,17 @@ export const metadata: Metadata = {
     description: 'A place to purchase beautiful art',
 }
 
-export default async function RootLayout({
+export default function RootLayout({
     children,
 }: Readonly<{
     children: React.ReactNode
 }>) {
-    const loggedIn = await getAuthStatus() // Fetch auth state on the server
     return (
         <html lang='en'>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <AuthProvider initialLoggedIn={loggedIn}>
+                <AuthProvider>
                     <CartProvider>
                         <Navbar />
                         {children}
