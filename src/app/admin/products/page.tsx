@@ -9,6 +9,7 @@ import {
 } from '@/components/ui/table'
 import styles from './page.module.css'
 import prisma from '@/lib/prisma'
+import { requireAdmin } from '@/lib/auth'
 
 // model Product {
 //     id          String  @id @default(uuid())
@@ -22,6 +23,7 @@ import prisma from '@/lib/prisma'
 //   }
 
 export default async function products() {
+    const user = await requireAdmin()
     const products = await prisma.product.findMany()
     return (
         <div className={styles.wrapper}>

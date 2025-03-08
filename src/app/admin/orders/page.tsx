@@ -10,6 +10,7 @@ import {
 import styles from './page.module.css'
 import prisma from '@/lib/prisma'
 import Link from 'next/link'
+import { requireAdmin } from '@/lib/auth'
 
 // model Order {
 //     id        String      @id @default(uuid())
@@ -26,6 +27,7 @@ import Link from 'next/link'
 //   }
 
 export default async function orders() {
+    const user = await requireAdmin()
     const orders = await prisma.order.findMany()
     return (
         <div className={styles.wrapper}>
