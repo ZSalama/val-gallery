@@ -32,7 +32,6 @@ model User {
   @@map("user")
 }
 
-
 model Address {
   id        String   @id @default(uuid())
   nickName  String?

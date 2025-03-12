@@ -1,9 +1,7 @@
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/lib/prisma'
 import { cookies } from 'next/headers'
 import styles from './page.module.css'
 import AddressForm from '@/components/AddressForm/AddressForm'
-
-const prisma = new PrismaClient()
 
 export const revalidate = 60 // Page regenerates every 60 seconds
 

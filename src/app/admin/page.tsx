@@ -16,6 +16,9 @@ export default async function Admin() {
             <Link href='/admin/orders'>
                 <button className={styles.button}>Orders</button>
             </Link>
+            <Link href='/admin/users'>
+                <button className={styles.button}>Users</button>
+            </Link>
         </div>
     )
 }

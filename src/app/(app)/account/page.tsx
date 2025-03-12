@@ -2,10 +2,8 @@
 import styles from './page.module.css'
 import Link from 'next/link'
 import { cookies } from 'next/headers'
-import { PrismaClient } from '@prisma/client'
+import prisma from '@/lib/prisma'
 import SignOutButton from '@/components/SignOutButton/SignOutButton'
-
-const prisma = new PrismaClient()
 
 export const revalidate = 60 // Page regenerates every 60 seconds
 
