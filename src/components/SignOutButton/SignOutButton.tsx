@@ -2,6 +2,7 @@
 import { useRouter } from 'next/navigation'
 import { signOut } from '@/lib/auth-client'
 import { useAuth } from '@/context/AuthContext'
+import styles from '../../app/(app)/account/page.module.css'
 
 export default function SignOutButton() {
     const router = useRouter()
@@ -14,5 +15,9 @@ export default function SignOutButton() {
         router.push('/') // Redirect to home page
     }
 
-    return <button onClick={handleSignOut}>Sign out</button>
+    return (
+        <button onClick={handleSignOut} className={styles.button}>
+            Sign out
+        </button>
+    )
 }

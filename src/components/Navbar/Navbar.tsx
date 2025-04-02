@@ -12,7 +12,7 @@ const Navbar = () => {
     const [style, setStyle] = useState(false)
     const [lastScrollY, setLastScrollY] = useState(0)
     const [showNavbar, setShowNavbar] = useState(true)
-    const { session, loading } = useAuth()
+    const { session } = useAuth()
 
     // if (loading) return null
 

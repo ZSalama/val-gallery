@@ -12,7 +12,7 @@ export default async function handler(
     res: NextApiResponse
 ) {
     if (req.method === 'POST') {
-        const { items }: { items: CartItem[] } = req.body
+        const { items, email }: { items: CartItem[]; email: string } = req.body
 
         if (!items || !Array.isArray(items)) {
             return res.status(400).json({ error: 'Invalid items' })
@@ -23,7 +23,7 @@ export default async function handler(
         }))
 
         try {
-            console.log(lineItems)
+            // console.log(lineItems)
             // Create Checkout Sessions from body params.
             const session = await stripe.checkout.sessions.create({
                 shipping_address_collection: {
@@ -34,6 +34,8 @@ export default async function handler(
                 payment_method_types: ['card'],
                 success_url: `${req.headers.origin}/cart/?success=true`,
                 cancel_url: `${req.headers.origin}/cart/?canceled=true`,
+                expand: ['line_items'],
+                customer_email: email,
             })
             res.status(200).json({ id: session.id })
 

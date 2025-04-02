@@ -26,27 +26,10 @@ model User {
   isAdmin       Boolean   @default(false)
 
   // custom fields
-  addresses Address[]
-  orders    Order[]
+  // addresses Address[]
+  orders Order[]
 
   @@map("user")
-}
-
-model Address {
-  id        String   @id @default(uuid())
-  nickName  String?
-  name      String
-  street    String
-  city      String
-  state     String
-  zip       String
-  country   String
-  createdAt DateTime @default(now())
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  orders    Order[]
-
-  @@map("address")
 }
 
 model Session {
@@ -95,26 +78,41 @@ model Verification {
 }
 
 model Order {
-  id        String      @id @default(uuid())
-  userId    String
-  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  addressId String
-  address   Address     @relation(fields: [addressId], references: [id], onDelete: Cascade)
-  total     Float
-  createdAt DateTime    @default(now())
-  items     OrderItem[]
-  status    Boolean     @default(false) // True if order is complete
+  id              String      @id @default(uuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  total           Float
+  createdAt       DateTime    @default(now())
+  items           OrderItem[]
+  status          Boolean     @default(false) // True if order is complete
+  shippingAddress Address     @relation(fields: [addressId], references: [id])
+  addressId       String
 
   @@map("orders")
 }
 
+model Address {
+  id        String   @id @default(uuid())
+  line1     String?
+  line2     String?
+  city      String?
+  state     String?
+  zip       String?
+  country   String?
+  createdAt DateTime @default(now())
+  Order     Order[]
+
+  @@map("address")
+}
+
 model OrderItem {
-  id        String @id @default(uuid())
-  orderId   String
-  order     Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  productId String
-  quantity  Int // Number of units purchased
-  price     Float // Store price at the time of purchase
+  id          String @id @default(uuid())
+  orderId     String
+  order       Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String
+  productName String @default("")
+  quantity    Int // Number of units purchased
+  price       Float // Store price at the time of purchase
 
   @@map("order_items") // Ensures correct table name in DB
 }

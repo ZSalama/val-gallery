@@ -1,48 +1,50 @@
-'use server'
+// shipping address now handled by stripe
 
-import { PrismaClient } from '@prisma/client'
-import { addressSchema } from '@/lib/types'
-import { auth } from '@/lib/auth'
-import { headers } from 'next/headers'
-import { revalidatePath } from 'next/cache'
+// 'use server'
 
-const prisma = new PrismaClient()
+// import { PrismaClient } from '@prisma/client'
+// import { addressSchema } from '@/lib/types'
+// import { auth } from '@/lib/auth'
+// import { headers } from 'next/headers'
+// import { revalidatePath } from 'next/cache'
 
-export async function submitForm(formData: addressSchema) {
-    // Get the user's session
-    const session = await auth.api.getSession({
-        headers: await headers(), // you need to pass the headers object.
-    })
-    if (!session) {
-        return 'User session not found'
-    }
-    // Validate input data
-    const result = addressSchema.safeParse(formData)
+// const prisma = new PrismaClient()
 
-    if (!result.success) {
-        return 'Invalid form data' // Ideally, return detailed errors
-    }
+// export async function submitForm(formData: addressSchema) {
+//     // Get the user's session
+//     const session = await auth.api.getSession({
+//         headers: await headers(), // you need to pass the headers object.
+//     })
+//     if (!session) {
+//         return 'User session not found'
+//     }
+//     // Validate input data
+//     const result = addressSchema.safeParse(formData)
 
-    const { name, street, city, state, zip, country } = result.data
+//     if (!result.success) {
+//         return 'Invalid form data' // Ideally, return detailed errors
+//     }
 
-    try {
-        // Save form data to the database
-        await prisma.address.create({
-            data: {
-                name,
-                street,
-                city,
-                state,
-                zip,
-                country,
-                createdAt: new Date(),
-                userId: session.user.id,
-            },
-        })
-        revalidatePath('/account/address')
-        return `Thank you, ${name}! Your message has been saved.`
-    } catch (error) {
-        console.error('Database Error:', error)
-        return 'An error occurred while saving your message.'
-    }
-}
+//     const { name, street, city, state, zip, country } = result.data
+
+//     try {
+//         // Save form data to the database
+//         await prisma.address.create({
+//             data: {
+//                 name,
+//                 street,
+//                 city,
+//                 state,
+//                 zip,
+//                 country,
+//                 createdAt: new Date(),
+//                 userId: session.user.id,
+//             },
+//         })
+//         revalidatePath('/account/address')
+//         return `Thank you, ${name}! Your message has been saved.`
+//     } catch (error) {
+//         console.error('Database Error:', error)
+//         return 'An error occurred while saving your message.'
+//     }
+// }

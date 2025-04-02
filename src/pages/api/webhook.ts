@@ -1,5 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
+import prisma from '@/lib/prisma'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
@@ -60,7 +61,79 @@ export default async function handler(
                 console.log('✅ Payment succeeded:', event.data.object)
                 break
             case 'checkout.session.completed':
+                const sessionWithLineItems =
+                    await stripe.checkout.sessions.retrieve(
+                        event.data.object.id,
+                        { expand: ['line_items'] }
+                    )
                 console.log('✅ Checkout session completed:', event.data.object)
+                console.log(
+                    '✅ Checkout session with line items:',
+                    sessionWithLineItems
+                )
+                if (sessionWithLineItems.line_items) {
+                    console.log(
+                        'line items data: ',
+                        sessionWithLineItems.line_items.data
+                    )
+                }
+                try {
+                    const user = await prisma.user.findUnique({
+                        where: { email: event.data.object.customer_email! },
+                    })
+                    if (!user) {
+                        console.error('User not found')
+                        return
+                    }
+                    // console.log('User:', user.email)
+                    const address = await prisma.address.create({
+                        data: {
+                            line1: event.data.object.customer_details?.address
+                                ?.line1,
+                            line2: event.data.object.customer_details?.address
+                                ?.line2,
+                            city: event.data.object.customer_details?.address
+                                ?.city,
+                            state: event.data.object.customer_details?.address
+                                ?.state,
+                            zip: event.data.object.customer_details?.address
+                                ?.postal_code,
+                            country:
+                                event.data.object.customer_details?.address
+                                    ?.country,
+                        },
+                    })
+                    // console.log('Address:', address)
+
+                    if (!sessionWithLineItems.line_items) {
+                        console.error(
+                            'Line items not found on checkout session'
+                        )
+                        return
+                    }
+
+                    await prisma.order.create({
+                        data: {
+                            userId: user.id,
+                            total: event.data.object.amount_total! / 100,
+                            addressId: address.id,
+                            items: {
+                                create: sessionWithLineItems.line_items.data.map(
+                                    (item: any) => ({
+                                        productId: item.price.id,
+                                        quantity: item.quantity,
+                                        price: item.price.unit_amount! / 100,
+                                        productName: item.description,
+                                        // amount: item.amount / 100,
+                                    })
+                                ),
+                            },
+                        },
+                    })
+                    // console.log('Order:', order)
+                } catch (error: any) {
+                    console.error('Error storing order:', error.message)
+                }
                 break
             case 'charge.succeeded':
                 console.log('✅ Charge succeeded:', event.data.object)

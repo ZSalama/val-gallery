@@ -27,7 +27,7 @@ import { requireAdmin } from '@/lib/auth'
 //   }
 
 export default async function orders() {
-    const user = await requireAdmin()
+    await requireAdmin()
     const orders = await prisma.order.findMany()
     return (
         <div className={styles.wrapper}>

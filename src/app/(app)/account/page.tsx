@@ -32,21 +32,20 @@ export default async function Account() {
 
     return (
         <div className={styles.wrapper}>
-            <h1 className={styles.title}>Your account</h1>
+            <h1 className={styles.title}>Account</h1>
 
             <div className={styles.content}>
                 <p>Email: {response?.email}</p>
                 <div className={styles.buttonContainer}>
                     <Link href='/account/orders'>
-                        <button className={styles.button}>
-                            Orders history
-                        </button>
+                        <button className={styles.button}>Order history</button>
                     </Link>
-                    <Link href='/account/address'>
+                    {/* address handled through stripe now */}
+                    {/* <Link href='/account/address'>
                         <button className={styles.button}>
                             Change delivery address
                         </button>
-                    </Link>
+                    </Link> */}
                     <SignOutButton />
                 </div>
             </div>

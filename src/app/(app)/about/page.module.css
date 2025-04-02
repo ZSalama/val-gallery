@@ -5,10 +5,13 @@
     font-weight: bold;
     text-align: center;
     padding: 1rem;
+    color: var(--nav-text);
+    margin-top: 5rem;
 }
 
 .content {
     padding: 05px 20px 20px 20px;
     margin-top: 0px;
     text-align: center;
+    color: var(--nav-text);
 }
