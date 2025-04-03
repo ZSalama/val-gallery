@@ -66,7 +66,23 @@ export default async function handler(
                 console.log('✅ Checkout session completed:', event.data.object)
                 console.log('event id: ', event.data.object.id)
 
-                await addOrder(event.data.object.id)
+                // Build the absolute URL using the protocol and host from the incoming request headers.
+                const protocol = req.headers['x-forwarded-proto'] || 'http'
+                const host = req.headers.host
+                const apiUrl = `${protocol}://${host}/api/test?sessionID=${event.data.object.id}`
+
+                const response = await fetch(apiUrl)
+                if (!response.ok) {
+                    return res
+                        .status(response.status)
+                        .json({ error: 'Error calling testStripe API' })
+                }
+
+                const data = await response.json()
+                console.log('testStripe response:', data)
+
+                // const success = await addOrder(event.data.object.id)
+                // console.log(success)
 
                 // let sessionWithLineItems: Stripe.Checkout.Session | null = null
                 // console.log('getting line items')

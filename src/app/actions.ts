@@ -130,4 +130,9 @@ export async function addOrder(eventID: string) {
         },
     })
     console.log('Order:', order)
+    if (order) {
+        return true
+    } else {
+        return false
+    }
 }
