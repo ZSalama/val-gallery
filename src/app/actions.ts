@@ -57,12 +57,19 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
     timeout: 10000,
 })
 
+export const config = {
+    api: {
+        bodyParser: false,
+    },
+}
+
 export async function addOrder(eventID: string) {
     // const orderResponse = await stripe.checkout.sessions.retrieve(eventID, {
     //     expand: ['line_items'],
     // })
+    console.log('addOrder called with eventID:', eventID)
     let orderResponse: Stripe.Checkout.Session | null = null
-
+    console.log('Retrieving checkout session with eventID:', eventID)
     try {
         orderResponse = await stripe.checkout.sessions.retrieve(eventID, {
             expand: ['line_items'],
