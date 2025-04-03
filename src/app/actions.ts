@@ -52,7 +52,10 @@
 import Stripe from 'stripe'
 import prisma from '@/lib/prisma'
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string, {
+    apiVersion: '2025-01-27.acacia',
+    timeout: 10000,
+})
 
 export async function addOrder(eventID: string) {
     // const orderResponse = await stripe.checkout.sessions.retrieve(eventID, {
