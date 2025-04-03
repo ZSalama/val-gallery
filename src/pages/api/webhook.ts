@@ -73,7 +73,19 @@ export default async function handler(
                         )
                     console.log(
                         '✅ Checkout session with line items:',
-                        sessionWithLineItems
+                        sessionWithLineItems,
+                        sessionWithLineItems.line_items?.data[0].price?.id
+                    )
+                    const sessionWithLineItemsExpanded =
+                        await stripe.checkout.sessions.retrieve(
+                            event.data.object.id,
+                            { expand: ['line_items.data.price.product'] }
+                        )
+                    console.log(
+                        '✅ Checkout session with line items expanded:',
+                        sessionWithLineItemsExpanded,
+                        sessionWithLineItemsExpanded.line_items?.data[0].price
+                            ?.id
                     )
                     // if (sessionWithLineItems.line_items) {
                     //     console.log(
@@ -108,7 +120,7 @@ export default async function handler(
                                             ?.address?.country,
                                 },
                             })
-                            // console.log('Address:', address)
+                            console.log('Address:', address)
 
                             if (!sessionWithLineItems.line_items) {
                                 console.error(
@@ -117,7 +129,7 @@ export default async function handler(
                                 return
                             }
                             try {
-                                await prisma.order.create({
+                                const order = await prisma.order.create({
                                     data: {
                                         userId: user.id,
                                         total:
@@ -140,7 +152,7 @@ export default async function handler(
                                         },
                                     },
                                 })
-                                // console.log('Order:', order)
+                                console.log('Order:', order)
                             } catch (error: any) {
                                 console.error(
                                     'Error storing order:',
