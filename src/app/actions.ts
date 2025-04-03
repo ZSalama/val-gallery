@@ -55,10 +55,24 @@ import prisma from '@/lib/prisma'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
 
 export async function addOrder(eventID: string) {
-    const orderResponse = await stripe.checkout.sessions.retrieve(eventID, {
-        expand: ['line_items'],
-    })
+    // const orderResponse = await stripe.checkout.sessions.retrieve(eventID, {
+    //     expand: ['line_items'],
+    // })
+    let orderResponse: Stripe.Checkout.Session | null = null
+
+    try {
+        orderResponse = await stripe.checkout.sessions.retrieve(eventID, {
+            expand: ['line_items'],
+        })
+        console.log('✅ Retrieved checkout session:', orderResponse)
+    } catch (error) {
+        console.error('❌ Error retrieving checkout session:', error)
+    }
     console.log('order: ', orderResponse)
+    if (!orderResponse) {
+        console.error('Order not found')
+        return
+    }
     if (orderResponse.line_items) {
         console.log('order line items: ', orderResponse.line_items)
         console.log('order line items data: ', orderResponse.line_items.data)

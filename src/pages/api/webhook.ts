@@ -66,7 +66,7 @@ export default async function handler(
                 console.log('✅ Checkout session completed:', event.data.object)
                 console.log('event id: ', event.data.object.id)
 
-                addOrder(event.data.object.id)
+                await addOrder(event.data.object.id)
 
                 // let sessionWithLineItems: Stripe.Checkout.Session | null = null
                 // console.log('getting line items')
