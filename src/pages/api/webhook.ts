@@ -63,77 +63,82 @@ export default async function handler(
                 break
             case 'checkout.session.completed':
                 console.log('✅ Checkout session completed:', event.data.object)
-                const sessionWithLineItems =
-                    await stripe.checkout.sessions.retrieve(
-                        event.data.object.id,
-                        { expand: ['line_items'] }
-                    )
-                console.log(
-                    '✅ Checkout session with line items:',
-                    sessionWithLineItems
-                )
-                if (sessionWithLineItems.line_items) {
-                    console.log(
-                        'line items data: ',
-                        sessionWithLineItems.line_items.data
-                    )
-                }
                 try {
-                    const user = await prisma.user.findUnique({
-                        where: { email: event.data.object.customer_email! },
-                    })
-                    if (!user) {
-                        console.error('User not found')
-                        return
-                    }
-                    // console.log('User:', user.email)
-                    const address = await prisma.address.create({
-                        data: {
-                            line1: event.data.object.customer_details?.address
-                                ?.line1,
-                            line2: event.data.object.customer_details?.address
-                                ?.line2,
-                            city: event.data.object.customer_details?.address
-                                ?.city,
-                            state: event.data.object.customer_details?.address
-                                ?.state,
-                            zip: event.data.object.customer_details?.address
-                                ?.postal_code,
-                            country:
-                                event.data.object.customer_details?.address
-                                    ?.country,
-                        },
-                    })
-                    // console.log('Address:', address)
-
-                    if (!sessionWithLineItems.line_items) {
-                        console.error(
-                            'Line items not found on checkout session'
+                    const sessionWithLineItems =
+                        await stripe.checkout.sessions.retrieve(
+                            event.data.object.id,
+                            { expand: ['line_items'] }
                         )
-                        return
-                    }
-
-                    await prisma.order.create({
-                        data: {
-                            userId: user.id,
-                            total: event.data.object.amount_total! / 100,
-                            addressId: address.id,
-                            items: {
-                                create: sessionWithLineItems.line_items.data.map(
-                                    (item: any) => ({
-                                        productId: item.price.id,
-                                        quantity: item.quantity,
-                                        price: item.price.unit_amount! / 100,
-                                        productName: item.description,
-                                        // amount: item.amount / 100,
-                                    })
-                                ),
+                    console.log(
+                        '✅ Checkout session with line items:',
+                        sessionWithLineItems
+                    )
+                    // if (sessionWithLineItems.line_items) {
+                    //     console.log(
+                    //         'line items data: ',
+                    //         sessionWithLineItems.line_items.data
+                    //     )
+                    // }
+                    try {
+                        const user = await prisma.user.findUnique({
+                            where: { email: event.data.object.customer_email! },
+                        })
+                        if (!user) {
+                            console.error('User not found')
+                            return
+                        }
+                        // console.log('User:', user.email)
+                        const address = await prisma.address.create({
+                            data: {
+                                line1: event.data.object.customer_details
+                                    ?.address?.line1,
+                                line2: event.data.object.customer_details
+                                    ?.address?.line2,
+                                city: event.data.object.customer_details
+                                    ?.address?.city,
+                                state: event.data.object.customer_details
+                                    ?.address?.state,
+                                zip: event.data.object.customer_details?.address
+                                    ?.postal_code,
+                                country:
+                                    event.data.object.customer_details?.address
+                                        ?.country,
                             },
-                        },
-                    })
-                    // console.log('Order:', order)
+                        })
+                        // console.log('Address:', address)
+
+                        if (!sessionWithLineItems.line_items) {
+                            console.error(
+                                'Line items not found on checkout session'
+                            )
+                            return
+                        }
+
+                        await prisma.order.create({
+                            data: {
+                                userId: user.id,
+                                total: event.data.object.amount_total! / 100,
+                                addressId: address.id,
+                                items: {
+                                    create: sessionWithLineItems.line_items.data.map(
+                                        (item: any) => ({
+                                            productId: item.price.id,
+                                            quantity: item.quantity,
+                                            price:
+                                                item.price.unit_amount! / 100,
+                                            productName: item.description,
+                                            // amount: item.amount / 100,
+                                        })
+                                    ),
+                                },
+                            },
+                        })
+                        // console.log('Order:', order)
+                    } catch (error: any) {
+                        console.error('Error storing order:', error.message)
+                    }
                 } catch (error: any) {
-                    console.error('Error storing order:', error.message)
+                    console.error('Error retrieving line items:', error.message)
                 }
                 break
             case 'charge.succeeded':
