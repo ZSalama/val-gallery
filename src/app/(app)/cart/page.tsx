@@ -135,6 +135,15 @@ export default function Cart() {
                     </button>
                 </section>
             </div>
+            <p className='bg-gray-200 max-w-sm mx-auto p-4 mt-4 rounded-lg shadow'>
+                <strong>Note:</strong> This is a test version of the checkout
+                process. You will not be charged.
+            </p>
+            <p className='bg-gray-200 max-w-sm mx-auto p-4 m-4 rounded-lg shadow'>
+                *Pictures of the card products were generated using AI. Printed
+                cards will use original picture shown on the first image of the
+                product page.
+            </p>
         </>
     )
 }

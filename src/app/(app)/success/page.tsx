@@ -1,15 +1,16 @@
-// import styles from './page.module.css'
-
 export default async function Success() {
     return (
-        <div>
-            <title>Thanks for your order!</title>
-            <h1>Thanks for your order!</h1>
-            <p>
-                We appreciate your business! If you have any questions, please
-                email
-                <a href='mailto:orders@example.com'>orders@example.com</a>.
-            </p>
+        <div className='min-h-screen flex items-center justify-center p-4'>
+            <div className='bg-white p-8 rounded-lg shadow-lg max-w-lg w-full'>
+                <title>Thanks for your order!</title>
+                <h1 className='text-2xl font-bold text-gray-800 mb-4'>
+                    Thanks for your order!
+                </h1>
+                <p className='text-gray-600'>
+                    We appreciate your business. Every order is meaningful. Your
+                    order might take some time to show up under order history.
+                </p>
+            </div>
         </div>
     )
 }
