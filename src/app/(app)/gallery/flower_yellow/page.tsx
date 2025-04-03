@@ -28,7 +28,7 @@ const item_card = {
     type: 'Card',
 }
 
-export default function Lizard() {
+export default function Flower_yellow() {
     const [selectedType, setSelectedType] = useState('Poster')
 
     return (
@@ -39,7 +39,7 @@ export default function Lizard() {
                         <CarouselItem>
                             <div className={styles.image_wrapper}>
                                 <Image
-                                    src='https://d2oeo8w8j25w98.cloudfront.net/lizard.jpg'
+                                    src='https://d2oeo8w8j25w98.cloudfront.net/flower_yellow.jpg'
                                     alt='Lizard'
                                     width={720}
                                     height={960}
@@ -52,7 +52,7 @@ export default function Lizard() {
                         <CarouselItem>
                             <div className={styles.image_wrapper}>
                                 <Image
-                                    src='https://d2oeo8w8j25w98.cloudfront.net/lizard.jpg'
+                                    src='https://d2oeo8w8j25w98.cloudfront.net/flower_yellow.jpg'
                                     alt='Horse'
                                     width={720}
                                     height={960}

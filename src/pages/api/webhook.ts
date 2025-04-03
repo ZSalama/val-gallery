@@ -1,7 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
-import prisma from '@/lib/prisma'
-import { addOrder } from '@/app/actions'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY as string)
 const endpointSecret = process.env.STRIPE_WEBHOOK_SECRET
@@ -69,7 +67,7 @@ export default async function handler(
                 // Build the absolute URL using the protocol and host from the incoming request headers.
                 const protocol = req.headers['x-forwarded-proto'] || 'http'
                 const host = req.headers.host
-                const apiUrl = `${protocol}://${host}/api/test?sessionID=${event.data.object.id}`
+                const apiUrl = `${protocol}://${host}/api/add-stripe-order?sessionID=${event.data.object.id}`
 
                 const response = await fetch(apiUrl)
                 if (!response.ok) {
@@ -80,84 +78,6 @@ export default async function handler(
 
                 const data = await response.json()
                 console.log('testStripe response:', data)
-
-                // const success = await addOrder(event.data.object.id)
-                // console.log(success)
-
-                // let sessionWithLineItems: Stripe.Checkout.Session | null = null
-                // console.log('getting line items')
-                // try {
-                //     sessionWithLineItems =
-                //         await stripe.checkout.sessions.retrieve(
-                //             event.data.object.id,
-                //             { expand: ['line_items'] }
-                //         )
-                // } catch (error: any) {
-                //     console.error('Error retrieving line items:', error.message)
-                // }
-                // if (!sessionWithLineItems) {
-                //     console.error('Session with line items not found')
-                //     return
-                // }
-                // console.log(
-                //     '✅ Checkout session with line items:',
-                //     sessionWithLineItems
-                // )
-                // // if (sessionWithLineItems.line_items) {
-                // //     console.log(
-                // //         'line items data: ',
-                // //         sessionWithLineItems.line_items.data
-                // //     )
-                // // }
-                // const user = await prisma.user.findUnique({
-                //     where: { email: event.data.object.customer_email! },
-                // })
-                // if (!user) {
-                //     console.error('User not found')
-                //     return
-                // }
-                // // console.log('User:', user.email)
-                // const address = await prisma.address.create({
-                //     data: {
-                //         line1: event.data.object.customer_details?.address
-                //             ?.line1,
-                //         line2: event.data.object.customer_details?.address
-                //             ?.line2,
-                //         city: event.data.object.customer_details?.address?.city,
-                //         state: event.data.object.customer_details?.address
-                //             ?.state,
-                //         zip: event.data.object.customer_details?.address
-                //             ?.postal_code,
-                //         country:
-                //             event.data.object.customer_details?.address
-                //                 ?.country,
-                //     },
-                // })
-                // console.log('Address:', address)
-
-                // if (!sessionWithLineItems.line_items) {
-                //     console.error('Line items not found on checkout session')
-                //     return
-                // }
-                // const order = await prisma.order.create({
-                //     data: {
-                //         userId: user.id,
-                //         total: event.data.object.amount_total! / 100,
-                //         addressId: address.id,
-                //         items: {
-                //             create: sessionWithLineItems.line_items.data.map(
-                //                 (item: any) => ({
-                //                     productId: item.price.id,
-                //                     quantity: item.quantity,
-                //                     price: item.price.unit_amount! / 100,
-                //                     productName: item.description,
-                //                     // amount: item.amount / 100,
-                //                 })
-                //             ),
-                //         },
-                //     },
-                // })
-                // console.log('Order:', order)
 
                 break
             case 'charge.succeeded':

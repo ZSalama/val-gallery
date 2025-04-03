@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import styles from './../items.module.css'
+import styles from './../items-v.module.css'
 
 export default function Gallery() {
     const images = [

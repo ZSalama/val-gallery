@@ -7,6 +7,7 @@ type GalleryImageLinkProps = {
     alt: string
     width: number
     height: number
+    url: string
     loading?: 'eager' | 'lazy'
 }
 
@@ -15,6 +16,7 @@ export default function GalleryImageLink({
     alt,
     width,
     height,
+    url,
     loading = 'lazy',
 }: GalleryImageLinkProps) {
     return (
@@ -29,7 +31,7 @@ export default function GalleryImageLink({
                 quality={75}
             />
             <Link
-                href='gallery/lizard'
+                href={url}
                 className={styles.image_link}
                 aria-label={`link to ${alt} page`}
             >

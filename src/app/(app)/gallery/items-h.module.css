@@ -51,10 +51,38 @@
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1.5rem;
     border-radius: 2rem;
+    /* border: 1px solid red; */
 }
 
 .blurb {
     text-align: left;
+}
+
+/* Toggle Buttons Styling */
+.toggleButtons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.toggleButtons button {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+}
+
+.toggleButtons button:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.toggleButtons button.active {
+    background: #fff;
+    color: #000;
 }
 
 @media screen and (min-width: 800px) {
@@ -70,7 +98,7 @@
         align-items: normal;
         padding-top: 5rem;
         padding-bottom: 10rem;
-        min-height: calc(100vh - 9vh);
+        /* min-height: calc(100vh - 9vh); */
     }
 
     .description {
@@ -84,12 +112,13 @@
 
     .carousel {
         flex: 1;
+        align-self: center;
         /* padding-top: 4rem; */
         margin-right: 5rem;
         margin-left: 5rem;
-        margin: 0rem 4rem 1rem 4rem;
+        margin: 1rem 4rem 1rem 4rem;
         max-width: 43rem;
 
-        aspect-ratio: 1/1;
+        /* aspect-ratio: 3/4; */
     }
 }

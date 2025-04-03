@@ -5,6 +5,7 @@ export type CartItem = {
     name: string //product name
     cost: number //cost
     quantity: number
+    type?: string //type
 }
 
 export default function useCart() {

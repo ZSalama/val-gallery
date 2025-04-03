@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 
 export default function AddToCartForm({ item }: { item: CartItem }) {
     const { addItemToCart } = useCartContext()
-    const [quantity, setQuantity] = useState(1)
+    const [quantity, setQuantity] = useState(0)
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault()
@@ -17,7 +17,7 @@ export default function AddToCartForm({ item }: { item: CartItem }) {
             cost: item.cost,
             quantity: quantity,
         })
-        setQuantity(1) // Reset quantity after adding
+        setQuantity(0) // Reset quantity after adding
     }
 
     return (
@@ -32,7 +32,7 @@ export default function AddToCartForm({ item }: { item: CartItem }) {
                 onChange={(e) => setQuantity(Number(e.target.value))}
                 min='1'
             />
-            <button type='submit'>Add to Cart</button>
+            <button type='submit'>Add {item.type} to Cart</button>
         </form>
     )
 }
