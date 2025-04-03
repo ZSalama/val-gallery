@@ -24,6 +24,7 @@ export const config = {
     api: {
         bodyParser: false,
     },
+    runtime: 'nodejs',
 }
 
 export default async function handler(
@@ -61,12 +62,12 @@ export default async function handler(
                 console.log('✅ Payment succeeded:', event.data.object)
                 break
             case 'checkout.session.completed':
+                console.log('✅ Checkout session completed:', event.data.object)
                 const sessionWithLineItems =
                     await stripe.checkout.sessions.retrieve(
                         event.data.object.id,
                         { expand: ['line_items'] }
                     )
-                console.log('✅ Checkout session completed:', event.data.object)
                 console.log(
                     '✅ Checkout session with line items:',
                     sessionWithLineItems
