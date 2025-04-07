@@ -6,7 +6,8 @@ export default function Egg() {
             product={{
                 name: 'Eggs',
                 id_poster: 'Egg Poster',
-                url_poster: 'https://d2oeo8w8j25w98.cloudfront.net/egg.jpg?v=2',
+                url_poster:
+                    'https://d2oeo8w8j25w98.cloudfront.net/egg_fit.webp',
                 price_id_poster: 'price_1R9vGPGhmoGg54MoseJF4Scc',
                 cost_poster: 60,
                 id_card: 'Green Flowers Card',

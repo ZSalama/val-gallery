@@ -7,7 +7,7 @@ export default function Horse_gallery() {
                 name: 'Horse Gallery',
                 id_poster: 'Horse Gallery Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/horse_gallery.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/horse_gallery_fit.webp',
                 price_id_poster: 'price_1RBNKVGhmoGg54Mo9TJLy9ED',
                 cost_poster: 60,
                 id_card: 'Horse Gallery Card',

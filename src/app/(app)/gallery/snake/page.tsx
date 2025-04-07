@@ -7,7 +7,7 @@ export default function Snake() {
                 name: 'Tree with Snake',
                 id_poster: 'Tree with Snake Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/snake.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/snake_fit.webp',
                 price_id_poster: 'price_1R9wY0GhmoGg54MoKN8KUeKu',
                 cost_poster: 60,
                 id_card: 'Tree with Snake Card',

@@ -7,7 +7,7 @@ export default function Bamboo() {
                 name: 'Bamboo',
                 id_poster: 'Bamboo Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/bamboo.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/bamboo_fit.webp',
                 price_id_poster: 'price_1R9uVFGhmoGg54MojDoTAajG',
                 cost_poster: 60,
                 id_card: 'Bamboo Card',

@@ -7,83 +7,83 @@ export default function Gallery() {
     const images: GalleryImage[] = [
         {
             title: 'flower_green.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/flower_green.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/flower_green_fit.webp',
             url: 'gallery/flower_green',
         },
         {
             title: 'flower_white.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/flower_white.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/flower_white_fit.webp',
             url: 'gallery/flower_white',
         },
         {
             title: 'tree_3.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/tree_3.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/tree_3_fit.webp',
             url: 'gallery/tree_3',
         },
         {
             title: 'horse_gallery.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/horse_gallery.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/horse_gallery_fit.webp',
             url: 'gallery/horse_gallery',
         },
         {
             title: 'horse_red.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/horse_red.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/horse_red_fit.webp',
             url: 'gallery/horse_red',
         },
         {
             title: 'tree_2.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/tree_2.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/tree_2_fit.webp',
             url: 'gallery/tree_2',
         },
         {
             title: 'lizard.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/lizard.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/lizard_fit.webp',
             url: 'gallery/lizard',
         },
 
         {
             title: 'butterfly.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/butterfly.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/butterfly_fit.webp',
             url: 'gallery/butterfly',
         },
         {
             title: 'egg.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/egg.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/egg_fit.webp',
             url: 'gallery/egg',
         },
         {
             title: 'humming_bird.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/humming_bird.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/humming_bird_fit.webp',
             url: 'gallery/humming_bird',
         },
         {
             title: 'bamboo.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/bamboo.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/bamboo_fit.webp',
             url: 'gallery/bamboo',
         },
         {
             title: 'flower_yellow.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/flower_yellow.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/flower_yellow_fit.webp',
             url: 'gallery/flower_yellow',
         },
         {
             title: 'wheel.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/wheel.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/wheel_fit.webp',
             url: 'gallery/wheel',
         },
         {
             title: 'snake.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/snake.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/snake_fit.webp',
             url: 'gallery/snake',
         },
         {
             title: 'tree_1.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/tree_1.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/tree_1_fit.webp',
             url: 'gallery/tree_1',
         },
         {
             title: 'model_1.jpg',
-            src: 'https://d2oeo8w8j25w98.cloudfront.net/model_1.jpg?v=2',
+            src: 'https://d2oeo8w8j25w98.cloudfront.net/model_1_fit.webp',
             url: 'gallery/model_1',
         },
     ]

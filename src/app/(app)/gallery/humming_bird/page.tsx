@@ -7,7 +7,7 @@ export default function Humming_Bird() {
                 name: 'Humming Bird',
                 id_poster: 'Humming Bird Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/humming_bird.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/humming_bird_fit.webp',
                 price_id_poster: 'price_1R9xLiGhmoGg54MoUv9hmDGV',
                 cost_poster: 60,
                 id_card: 'Humming Bird Card',

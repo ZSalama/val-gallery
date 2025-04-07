@@ -7,7 +7,7 @@ export default function Butterfly() {
                 name: 'Butterfly',
                 id_poster: 'Butterfly Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/butterfly.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/butterfly_fit.webp',
                 price_id_poster: 'price_1R9v89GhmoGg54MoZQvhrLYG',
                 cost_poster: 60,
                 id_card: 'Butterfly Card',

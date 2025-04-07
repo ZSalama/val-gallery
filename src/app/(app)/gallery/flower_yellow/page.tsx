@@ -7,7 +7,7 @@ export default function Flower_yellow() {
                 name: 'Yellow Flowers',
                 id_poster: 'Yellow Flowers Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/flower_yellow.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/flower_yellow_fit.webp',
                 price_id_poster: 'price_1R9vNuGhmoGg54Moeqi8Ig9f',
                 cost_poster: 60,
                 id_card: 'Yellow Flowers Card',

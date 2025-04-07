@@ -7,7 +7,7 @@ export default function Tree_3() {
                 name: 'Autumn Tree',
                 id_poster: 'Autumn Tree Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/tree_3.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/tree_3_fit.webp',
                 price_id_poster: 'price_1R9x6yGhmoGg54MoPbDVi8Jh',
                 cost_poster: 60,
                 id_card: 'Autumn Tree Card',

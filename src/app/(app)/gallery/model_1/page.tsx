@@ -7,7 +7,7 @@ export default function Model_1() {
                 name: 'Model',
                 id_poster: 'Model Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/model_1.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/model_1_fit.webp',
                 price_id_poster: 'price_1R9xW6GhmoGg54MoLyNh2Pgw',
                 cost_poster: 60,
                 id_card: 'Model Card',

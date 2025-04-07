@@ -7,7 +7,7 @@ export default function Lizard() {
                 name: 'Lizard',
                 id_poster: 'Lizard Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/lizard.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/lizard_fit.webp',
                 price_id_poster: 'price_1R9vyEGhmoGg54Mox2VlsV2t',
                 cost_poster: 60,
                 id_card: 'Lizard Card',

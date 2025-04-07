@@ -7,7 +7,7 @@ export default function Tree_2() {
                 name: 'White Trees',
                 id_poster: 'White Trees Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/tree_2.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/tree_2_fit.webp',
                 price_id_poster: 'price_1R9vp9GhmoGg54MoWFFi3MVB',
                 cost_poster: 60,
                 id_card: 'White Trees Card',

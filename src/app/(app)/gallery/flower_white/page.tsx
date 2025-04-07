@@ -7,7 +7,7 @@ export default function Flower_white() {
                 name: 'White Flowers',
                 id_poster: 'White Flowers Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/flower_white.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/flower_white_fit.webp',
                 price_id_poster: 'price_1R9ttDGhmoGg54MouaPuY4J3',
                 cost_poster: 60,
                 id_card: 'White Flowers Card',

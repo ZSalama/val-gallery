@@ -7,7 +7,7 @@ export default function Wheel() {
                 name: 'Wheel',
                 id_poster: 'Wheel Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/wheel.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/wheel_fit.webp',
                 price_id_poster: 'price_1R9wCJGhmoGg54MoiS2rTuz6',
                 cost_poster: 60,
                 id_card: 'Wheel Card',

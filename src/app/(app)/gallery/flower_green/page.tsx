@@ -7,7 +7,7 @@ export default function Flower_green() {
                 name: 'Green Flowers',
                 id_poster: 'Green Flowers Poster',
                 url_poster:
-                    'https://d2oeo8w8j25w98.cloudfront.net/flower_green.jpg?v=2',
+                    'https://d2oeo8w8j25w98.cloudfront.net/flower_green_fit.webp',
                 price_id_poster: 'price_1R9tdmGhmoGg54MoEaLvO4RX',
                 cost_poster: 60,
                 id_card: 'Green Flowers Card',
