@@ -1,5 +1,5 @@
 import '../globals.css'
-import Image from 'next/image'
+// import Image from 'next/image'
 
 export default function RootLayout({
     children,
@@ -8,7 +8,7 @@ export default function RootLayout({
 }>) {
     return (
         <>
-            <div className='backgroundImageContainer'>
+            {/* <div className='backgroundImageContainer'>
                 <Image
                     src='https://d2oeo8w8j25w98.cloudfront.net/starry_background.png'
                     alt='Background'
@@ -18,8 +18,40 @@ export default function RootLayout({
                     loading='eager'
                 />
             </div>
-            {children}
+            {children} */}
+            <div className='relative overflow-hidden'>
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className='fixed top-0 left-0 w-full h-full object-cover z-[-1]'
+                >
+                    <source
+                        src='https://d2oeo8w8j25w98.cloudfront.net/star_background2.mp4'
+                        type='video/mp4'
+                    />
+                    Your browser does not support the video tag.
+                </video>
+                {children}
+            </div>
+
             {/* <Footer /> */}
         </>
     )
+}
+
+{
+    /*             <div className='relative w-full h-screen overflow-hidden'>
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className='absolute top-0 left-0 w-full h-full object-cover z-[-1]'
+                >
+                    <source src='https://d2oeo8w8j25w98.cloudfront.net/starry_background.webm' type='video/mp4' />
+                    Your browser does not support the video tag.
+                </video>
+            </div> */
 }
