@@ -91,7 +91,7 @@ export default function Cart() {
         //     </div>
         // </>
         <>
-            <div className='mt-32 max-w-5xl mx-auto p-4'>
+            <div className='mt-32 max-w-xl mx-auto p-4'>
                 <div className='bg-gray-200 shadow rounded-lg p-6'>
                     <h2 className='text-2xl font-bold mb-4'>Cart Items</h2>
                     {cart.length === 0 ? (
@@ -135,14 +135,10 @@ export default function Cart() {
                     </button>
                 </section>
             </div>
-            <p className='bg-gray-200 max-w-sm mx-auto p-4 mt-4 rounded-lg shadow'>
+            <p className='bg-gray-200 max-w-xl mx-auto p-4 mt-4 rounded-lg shadow'>
                 <strong>Note:</strong> This is a test version of the checkout
-                process. You will not be charged.
-            </p>
-            <p className='bg-gray-200 max-w-sm mx-auto p-4 m-4 rounded-lg shadow'>
-                *Pictures of the card products were generated using AI. Printed
-                cards will use original picture shown on the first image of the
-                product page.
+                process. You will not be charged. Use the test card number: 4242
+                4242 4242 4242
             </p>
         </>
     )

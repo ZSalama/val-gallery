@@ -28,8 +28,8 @@ export default function RootLayout({
                     className='fixed top-0 left-0 w-full h-full object-cover z-[-1]'
                 >
                     <source
-                        src='https://d2oeo8w8j25w98.cloudfront.net/star_background2.mp4'
-                        type='video/mp4'
+                        src='https://d2oeo8w8j25w98.cloudfront.net/Star_Background2.webm'
+                        type='video/webm'
                     />
                     Your browser does not support the video tag.
                 </video>
