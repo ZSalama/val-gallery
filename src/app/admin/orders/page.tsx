@@ -53,7 +53,7 @@ export default async function orders() {
                             <TableCell>{orders.createdAt.toString()}</TableCell>
                             <TableCell>{orders.total}</TableCell>
                             <TableCell>
-                                (orders.status) ? fulfiled : unfulfilled
+                                {orders.status ? 'shipped' : 'unfulfilled'}
                             </TableCell>
                         </TableRow>
                     ))}

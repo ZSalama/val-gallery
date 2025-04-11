@@ -47,7 +47,6 @@ export default async function users() {
                     <TableRow>
                         <TableHead className='w-[100px]'>User Name</TableHead>
                         <TableHead>Email</TableHead>
-                        <TableHead>Price</TableHead>
                         <TableHead>Created At</TableHead>
                         <TableHead># of orders</TableHead>
                     </TableRow>
@@ -58,7 +57,6 @@ export default async function users() {
                             <TableCell className='font-medium'>
                                 {users.name}
                             </TableCell>
-                            <TableCell>{users.name}</TableCell>
                             <TableCell>{users.email}</TableCell>
                             <TableCell>
                                 {users.createdAt.getMonth()}.
