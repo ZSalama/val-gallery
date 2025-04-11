@@ -21,12 +21,10 @@
 .title {
     font-size: 3em;
     font-weight: bold;
-    margin-right: 1rem;
     text-align: center;
 }
 
 .subtitle {
-    margin-right: 1rem;
     text-align: center;
 }
 
@@ -56,9 +54,10 @@
 
 @media (min-width: 701px) {
     .hero_container {
-        display: flex;
-        margin-top: 40vh;
+        /* display: flex; */
+        margin-top: 35vh;
         justify-content: center;
+        text-align: center;
     }
     .hero_text {
         text-align: left;

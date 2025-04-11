@@ -48,5 +48,12 @@ export default function useCart() {
         // localStorage.removeItem('cart')
     }
 
-    return { cart, addItemToCart, removeItemFromCart, clearCart }
+    const getTotal = () => {
+        return cart.reduce(
+            (total, item) => total + item.cost * item.quantity,
+            0
+        )
+    }
+
+    return { cart, addItemToCart, removeItemFromCart, clearCart, getTotal }
 }

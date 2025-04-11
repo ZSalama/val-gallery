@@ -216,7 +216,10 @@ const Navbar = () => {
                                     }
                                     aria-hidden='true'
                                 >
-                                    Cart ({cart.length})
+                                    <span className='pr-2'> Cart </span>
+                                    <span className='bg-black text-white border-white border-2 text-xs font-bold px-2 py-0.5 rounded-full'>
+                                        {cart.length}
+                                    </span>
                                 </Link>
                             )}
                         </li>

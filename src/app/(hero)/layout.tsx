@@ -10,7 +10,7 @@ export default function RootLayout({
         <>
             <div className='backgroundImageContainer'>
                 <Image
-                    src='https://d2oeo8w8j25w98.cloudfront.net/horse_gallery.jpg'
+                    src='https://d2oeo8w8j25w98.cloudfront.net/horse_gallery_hd.webp'
                     alt='Background'
                     fill={true}
                     quality={75}
