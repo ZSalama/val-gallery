@@ -42,7 +42,7 @@ const Navbar = () => {
             {/* open button */}
             <button
                 className={styles.style + ' ' + styles.menu_open_button}
-                onClick={() => openSidebar()}
+                onClick={openSidebar}
                 aria-label='Open navigation'
             >
                 <svg
@@ -62,7 +62,7 @@ const Navbar = () => {
                         ? styles.overlay + ' ' + styles.overlay_show
                         : styles.overlay
                 }
-                onClick={() => openSidebar()}
+                onClick={openSidebar}
                 aria-hidden='true'
             ></div>
             {/* navbar */}
@@ -79,7 +79,7 @@ const Navbar = () => {
                             ? styles.nav + ' ' + styles.show
                             : styles.nav + ' ' + styles.hide
                     }
-                    onClick={() => openSidebar()}
+                    // onClick={() => openSidebar()}
                 >
                     <ul className={styles.navList}>
                         <li>
@@ -87,7 +87,7 @@ const Navbar = () => {
                                 className={
                                     styles.link + ' ' + styles.menu_close_button
                                 }
-                                onClick={() => openSidebar()}
+                                onClick={openSidebar}
                                 aria-label='Close navigation'
                             >
                                 <svg
