@@ -1,20 +1,6 @@
-// components/BackgroundVideo.tsx
-'use client'
-
-import { useEffect, useRef } from 'react'
-
 export default function BackgroundVideo() {
-    const videoRef = useRef<HTMLVideoElement>(null)
-
-    useEffect(() => {
-        if (videoRef.current) {
-            videoRef.current.playbackRate = 0.7
-        }
-    }, [])
-
     return (
         <video
-            ref={videoRef}
             autoPlay
             muted
             loop
