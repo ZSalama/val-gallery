@@ -22,7 +22,7 @@ export default function BackgroundVideo() {
         >
             <source
                 src='https://d2oeo8w8j25w98.cloudfront.net/star_background3.mp4'
-                type='video/webm'
+                type='video/mp4'
             />
         </video>
     )
