@@ -117,6 +117,13 @@ export default function Cart() {
                 </section>
             </div>
             <p className='bg-gray-200 max-w-xl mx-auto p-4 mt-4 rounded-lg shadow'>
+                <strong>Note:</strong> Free shipping on orders over $25.00.
+            </p>
+            <p className='bg-gray-200 max-w-xl mx-auto p-4 mt-4 rounded-lg shadow'>
+                <strong>Note:</strong> Cards come in size 5&quot; by 7&quot; and
+                packs of 4.
+            </p>
+            <p className='bg-gray-200 max-w-xl mx-auto p-4 mt-4 rounded-lg shadow'>
                 <strong>Note:</strong> This is a test version of the checkout
                 process. You will not be charged. Use the test card number: 4242
                 4242 4242 4242
