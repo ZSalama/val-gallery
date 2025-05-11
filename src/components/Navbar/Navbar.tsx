@@ -62,7 +62,7 @@ const Navbar = () => {
 
             {/* Navbar Container */}
             <div
-                className={`fixed top-0 bg-transparent  left-0 w-full flex justify-center z-50 transition-transform duration-300 bg-black/50 ${
+                className={`fixed top-0  left-0 w-full flex justify-center z-50 transition-transform duration-300 bg-black/50 ${
                     showNavbar ? 'translate-y-0' : '-translate-y-full'
                 }`}
             >

@@ -6,6 +6,7 @@ import { useTransform, useScroll, motion } from 'framer-motion'
 
 export default function SAnim({ children }: { children: React.ReactNode }) {
     const gallery = useRef(null)
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const [dimension, setDimension] = useState({ width: 0, height: 0 })
 
     const { scrollYProgress } = useScroll({
