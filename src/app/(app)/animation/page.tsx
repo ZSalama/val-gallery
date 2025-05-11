@@ -114,3 +114,9 @@
 // }
 
 // useGLTF.preload('/stars_10.glb')
+
+import React from 'react'
+
+export default function page() {
+    return <div>animations</div>
+}
