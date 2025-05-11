@@ -1,5 +1,5 @@
 import '../globals.css'
-import BackgroundAnimation from '@/components/BackgroundAnimation/BackgroundAnimation'
+// import BackgroundAnimation from '@/components/BackgroundAnimation/BackgroundAnimation'
 
 // import BackgroundVideo from '@/components/BackgroundVideo/BackgroundVideo' // good enough bg video to default to
 
@@ -9,10 +9,10 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <div className='relative '>
+        <div>
             {/* <BackgroundVideo /> */}
             {children}
-            <BackgroundAnimation />
+            {/* <BackgroundAnimation /> */}
         </div>
         // <>
         //     {/* <div className='backgroundImageContainer'>
