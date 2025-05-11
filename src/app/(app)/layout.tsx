@@ -1,5 +1,7 @@
 import '../globals.css'
-import BackgroundVideo from '@/components/BackgroundVideo/BackgroundVideo'
+import BackgroundAnimation from '@/components/BackgroundAnimation/BackgroundAnimation'
+
+// import BackgroundVideo from '@/components/BackgroundVideo/BackgroundVideo' // good enough bg video to default to
 
 export default function RootLayout({
     children,
@@ -7,9 +9,10 @@ export default function RootLayout({
     children: React.ReactNode
 }>) {
     return (
-        <div className='relative overflow-hidden'>
-            <BackgroundVideo />
+        <div className='relative '>
+            {/* <BackgroundVideo /> */}
             {children}
+            <BackgroundAnimation />
         </div>
         // <>
         //     {/* <div className='backgroundImageContainer'>

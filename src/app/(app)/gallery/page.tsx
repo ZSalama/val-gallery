@@ -1,6 +1,19 @@
 import styles from './page.module.css'
 import GalleryImageLink from '@/components/ui/imageComponent'
 
+// its not the worst thing ive seen
+// but its not the best either
+
+const layout = [
+    { type: 'horizontal', indexes: [0, 1] },
+    { type: 'horizontal', indexes: [2, 3] },
+    { type: 'vertical', indexes: [4, 5, 6] },
+    { type: 'horizontal', indexes: [7, 8] },
+    { type: 'horizontal', indexes: [9, 10] },
+    { type: 'vertical', indexes: [11, 12, 13] },
+    { type: 'horizontal', indexes: [14, 15] },
+]
+
 export type GalleryImage = { title: string; src: string; url: string }
 
 export default function Gallery() {
@@ -92,148 +105,28 @@ export default function Gallery() {
         <div className={styles.gallery_container}>
             <h1 className={styles.title}>Gallery</h1>
             <div className={styles.wrapper}>
-                <div className={styles.grid_wrapper_horizontal}>
-                    <GalleryImageLink
-                        src={images[0].src}
-                        alt={images[0].title}
-                        width={960}
-                        height={720}
-                        loading='eager'
-                        url={images[0].url}
-                    />
-                    <GalleryImageLink
-                        src={images[1].src}
-                        alt={images[1].title}
-                        width={960}
-                        height={720}
-                        loading='lazy'
-                        url={images[1].url}
-                    />
-                </div>
-                <div className={styles.grid_wrapper_horizontal}>
-                    <GalleryImageLink
-                        src={images[2].src}
-                        alt={images[2].title}
-                        width={960}
-                        height={720}
-                        loading='lazy'
-                        url={images[2].url}
-                    />
-                    <GalleryImageLink
-                        src={images[3].src}
-                        alt={images[3].title}
-                        width={960}
-                        height={720}
-                        loading='lazy'
-                        url={images[3].url}
-                    />
-                </div>
-                <div className={styles.grid_wrapper_vertical}>
-                    <GalleryImageLink
-                        src={images[4].src}
-                        alt={images[4].title}
-                        width={720}
-                        height={960}
-                        loading='lazy'
-                        url={images[4].url}
-                    />
-                    <GalleryImageLink
-                        src={images[5].src}
-                        alt={images[5].title}
-                        width={720}
-                        height={960}
-                        loading='lazy'
-                        url={images[5].url}
-                    />
-                    <GalleryImageLink
-                        src={images[6].src}
-                        alt={images[6].title}
-                        width={720}
-                        height={960}
-                        loading='lazy'
-                        url={images[6].url}
-                    />
-                </div>
-                <div className={styles.grid_wrapper_horizontal}>
-                    <GalleryImageLink
-                        src={images[7].src}
-                        alt={images[7].title}
-                        width={960}
-                        height={720}
-                        loading='lazy'
-                        url={images[7].url}
-                    />
-                    <GalleryImageLink
-                        src={images[8].src}
-                        alt={images[8].title}
-                        width={960}
-                        height={720}
-                        loading='lazy'
-                        url={images[8].url}
-                    />
-                </div>
-                <div className={styles.grid_wrapper_horizontal}>
-                    <GalleryImageLink
-                        src={images[9].src}
-                        alt={images[9].title}
-                        width={960}
-                        height={720}
-                        loading='lazy'
-                        url={images[9].url}
-                    />
-                    <GalleryImageLink
-                        src={images[10].src}
-                        alt={images[10].title}
-                        width={960}
-                        height={720}
-                        loading='lazy'
-                        url={images[10].url}
-                    />
-                </div>
-                <div className={styles.grid_wrapper_vertical}>
-                    <GalleryImageLink
-                        src={images[11].src}
-                        alt={images[11].title}
-                        width={720}
-                        height={960}
-                        loading='lazy'
-                        url={images[11].url}
-                    />
-                    <GalleryImageLink
-                        src={images[12].src}
-                        alt={images[12].title}
-                        width={720}
-                        height={960}
-                        loading='lazy'
-                        url={images[12].url}
-                    />
-                    <GalleryImageLink
-                        src={images[13].src}
-                        alt={images[13].title}
-                        width={720}
-                        height={960}
-                        loading='lazy'
-                        url={images[13].url}
-                    />
-                </div>
-                <div className={styles.grid_wrapper_horizontal}>
-                    <GalleryImageLink
-                        src={images[14].src}
-                        alt={images[14].title}
-                        width={960}
-                        height={720}
-                        loading='lazy'
-                        url={images[14].url}
-                    />
-                    <GalleryImageLink
-                        src={images[15].src}
-                        alt={images[15].title}
-                        width={960}
-                        height={720}
-                        loading='lazy'
-                        url={images[15].url}
-                    />
-                </div>
+                {layout.map((row, rowIndex) => (
+                    <div
+                        key={rowIndex}
+                        className={
+                            row.type === 'horizontal'
+                                ? styles.grid_wrapper_horizontal
+                                : styles.grid_wrapper_vertical
+                        }
+                    >
+                        {row.indexes.map((i) => (
+                            <GalleryImageLink
+                                key={i}
+                                src={images[i].src}
+                                alt={images[i].title}
+                                width={row.type === 'horizontal' ? 960 : 720}
+                                height={row.type === 'horizontal' ? 720 : 960}
+                                loading={i === 0 ? 'eager' : 'lazy'}
+                                url={images[i].url}
+                            />
+                        ))}
+                    </div>
+                ))}
             </div>
         </div>
     )
