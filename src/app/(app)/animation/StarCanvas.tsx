@@ -2,27 +2,11 @@
 
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, PerspectiveCamera } from '@react-three/drei'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import * as THREE from 'three'
 
 export default function StarAnimation() {
     const [star, setStar] = useState({ x: 0, y: 0 })
-    // const gltf = useGLTF('/stars_7.glb')
-
-    // useEffect(() => {
-    //     gltf.scene.traverse((obj) => {
-    //         if ((obj as THREE.Mesh).isMesh) {
-    //             const mesh = obj as THREE.Mesh
-    //             mesh.material = new THREE.MeshStandardMaterial({
-    //                 color: 0xffff00, // base color
-    //                 emissive: 0xffff33, // glowing yellow
-    //                 emissiveIntensity: 1.5, // boost the glow
-    //                 metalness: 0.1,
-    //                 roughness: 0.5,
-    //             })
-    //         }
-    //     })
-    // }, [gltf.scene])
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect()
@@ -49,19 +33,18 @@ export default function StarAnimation() {
                     />
                     <ambientLight intensity={0.4} />
                     <directionalLight
-                        // castShadow
+                        castShadow
                         position={[5, 5, 5]}
                         intensity={0.8}
                         shadow-mapSize-width={1024}
                         shadow-mapSize-height={1024}
                     />
                     <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-                        {/* <planeGeometry args={[20, 20]} /> */}
-                        {/* <shadowMaterial /> */}
+                        <planeGeometry args={[20, 20]} />
+                        <shadowMaterial transparent opacity={0.2} />
                     </mesh>
 
                     <StarResponsiveModel star={star} />
-                    <meshStandardMaterial color='hotpink' />
                 </Canvas>
             </div>
             {/* <div className='relative min-h-screen mx-auto text-center text-4xl mt-60'>
@@ -77,7 +60,7 @@ interface StarProps {
 }
 
 function StarResponsiveModel({ star }: StarProps) {
-    const gltf = useGLTF('/stars_9.glb')
+    const gltf = useGLTF('/stars_7.glb')
     const groupRef = useRef<THREE.Group>(null)
 
     useFrame(() => {
@@ -98,12 +81,9 @@ function StarResponsiveModel({ star }: StarProps) {
                 object={gltf.scene}
                 castShadow
                 rotation={[-Math.PI / 2, 1.5, -Math.PI]}
-                material={
-                    gltf.materials['Material.001'] as THREE.MeshStandardMaterial
-                }
             />
         </group>
     )
 }
 
-useGLTF.preload('/stars_9.glb')
+useGLTF.preload('/stars_7.glb')
