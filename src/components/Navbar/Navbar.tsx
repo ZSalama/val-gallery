@@ -1,7 +1,6 @@
 'use client'
 import Link from 'next/link'
 import React, { useState, useEffect } from 'react'
-import styles from './Navbar.module.css'
 import { usePathname } from 'next/navigation'
 import { useCartContext } from '@/context/CartContext'
 import { useAuth } from '@/context/AuthContext'
@@ -9,18 +8,13 @@ import { useAuth } from '@/context/AuthContext'
 const Navbar = () => {
     const { cart } = useCartContext()
     const pathname = usePathname()
-    const [style, setStyle] = useState(false)
+    const [sidebarOpen, setSidebarOpen] = useState(false)
     const [lastScrollY, setLastScrollY] = useState(0)
     const [showNavbar, setShowNavbar] = useState(true)
     const { session } = useAuth()
 
-    // if (loading) return null
-
-    const openSidebar = () => {
-        setStyle((prev) => !prev)
-    }
-
-    // Scroll behavior: Show navbar when scrolling up, hide when scrolling down
+    const toggleSidebar = () => setSidebarOpen((prev) => !prev)
+    const closeSidebar = () => setSidebarOpen(false)
 
     useEffect(() => {
         let timeout: NodeJS.Timeout
@@ -32,20 +26,19 @@ const Navbar = () => {
                     currentScrollY < lastScrollY || currentScrollY < 50
                 )
                 setLastScrollY(currentScrollY)
-            }, 10) // Debounce to reduce re-renders
+            }, 10)
         }
-
         window.addEventListener('scroll', handleScroll)
         return () => window.removeEventListener('scroll', handleScroll)
     }, [lastScrollY])
 
     return (
-        <>
-            {/* open button */}
+        <div className=''>
+            {/* Open button */}
             <button
-                className={styles.style + ' ' + styles.menu_open_button}
-                onClick={openSidebar}
+                onClick={toggleSidebar}
                 aria-label='Open navigation'
+                className='block md:hidden fixed top-0 right-0 p-4 z-20'
             >
                 <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -57,40 +50,36 @@ const Navbar = () => {
                     <path d='M165.13-254.62q-10.68 0-17.9-7.26-7.23-7.26-7.23-18t7.23-17.86q7.22-7.13 17.9-7.13h629.74q10.68 0 17.9 7.26 7.23 7.26 7.23 18t-7.23 17.87q-7.22 7.12-17.9 7.12H165.13Zm0-200.25q-10.68 0-17.9-7.27-7.23-7.26-7.23-17.99 0-10.74 7.23-17.87 7.22-7.13 17.9-7.13h629.74q10.68 0 17.9 7.27 7.23 7.26 7.23 17.99 0 10.74-7.23 17.87-7.22 7.13-17.9 7.13H165.13Zm0-200.26q-10.68 0-17.9-7.26-7.23-7.26-7.23-18t7.23-17.87q7.22-7.12 17.9-7.12h629.74q10.68 0 17.9 7.26 7.23 7.26 7.23 18t-7.23 17.86q-7.22 7.13-17.9 7.13H165.13Z' />
                 </svg>
             </button>
-            {/* overlay */}
+
+            {/* Overlay (mobile only) */}
             <div
-                className={
-                    style
-                        ? styles.overlay + ' ' + styles.overlay_show
-                        : styles.overlay
-                }
-                onClick={openSidebar}
+                onClick={toggleSidebar}
                 aria-hidden='true'
-            ></div>
-            {/* navbar */}
+                className={`fixed inset-0 z-40 transition-colors duration-300 bg-transparent pointer-events-none md:hidden ${
+                    sidebarOpen ? 'bg-black/50 pointer-events-auto' : ''
+                }`}
+            />
+
+            {/* Navbar Container */}
             <div
-                className={`${
-                    styles.navContainer
-                } transition-transform duration-300 z-50${
+                className={`fixed top-0 bg-transparent  left-0 w-full flex justify-center z-50 transition-transform duration-300 bg-black/50 ${
                     showNavbar ? 'translate-y-0' : '-translate-y-full'
                 }`}
             >
                 <nav
-                    className={
-                        style
-                            ? styles.nav + ' ' + styles.show
-                            : styles.nav + ' ' + styles.hide
-                    }
-                    // onClick={() => openSidebar()}
+                    className={`flex justify-between items-center max-w-[1550px] w-full transition-[right] duration-300 ease-out bg-transparent md:static md:top-auto md:right-auto md:h-auto md:w-full md:border-none ${
+                        sidebarOpen
+                            ? 'fixed right-0 top-0 h-screen w-[min(15em,100%)] border-l border-[var(--hover-color)]'
+                            : 'fixed -right-full top-0 h-screen w-[min(15em,100%)] border-l border-[var(--hover-color)]'
+                    }`}
                 >
-                    <ul className={styles.navList}>
+                    <ul className='list-none flex flex-col md:flex-row w-full'>
+                        {/* Close button */}
                         <li>
                             <button
-                                className={
-                                    styles.link + ' ' + styles.menu_close_button
-                                }
-                                onClick={openSidebar}
+                                onClick={toggleSidebar}
                                 aria-label='Close navigation'
+                                className='block md:hidden p-4'
                             >
                                 <svg
                                     xmlns='http://www.w3.org/2000/svg'
@@ -103,132 +92,76 @@ const Navbar = () => {
                                 </svg>
                             </button>
                         </li>
-                        <li className={styles.home_link}>
-                            {pathname?.includes('/admin') ? (
-                                <Link
-                                    href='/admin'
-                                    className={
-                                        pathname === '/'
-                                            ? styles.activeLink +
-                                              ' ' +
-                                              styles.link
-                                            : styles.link
-                                    }
-                                    aria-label='Home'
-                                >
-                                    Home
-                                </Link>
-                            ) : (
-                                <Link
-                                    href='/'
-                                    className={
-                                        pathname === '/'
-                                            ? styles.activeLink +
-                                              ' ' +
-                                              styles.link
-                                            : styles.link
-                                    }
-                                    aria-label='Home'
-                                >
-                                    Home
-                                </Link>
-                            )}
-                        </li>
-                        <li>
+
+                        {/* Home Link */}
+                        <li className='flex md:ml-[50px] ml-0 z-10 md:mr-auto'>
                             <Link
-                                href='/gallery'
-                                className={
-                                    pathname === '/gallery'
-                                        ? styles.activeLink + ' ' + styles.link
-                                        : styles.link
+                                href={
+                                    pathname?.includes('/admin')
+                                        ? '/admin'
+                                        : '/'
                                 }
-                                aria-label='Gallery'
+                                aria-label='Home'
+                                onClick={closeSidebar}
+                                className={`flex no-underline min-w-full px-[2em] py-[30px] text-[var(--nav-text)] transition-colors duration-200 hover:bg-[var(--nav-foreground)] ${
+                                    pathname === '/'
+                                        ? 'bg-[var(--nav-foreground)]'
+                                        : ''
+                                }`}
                             >
-                                Gallery
+                                Home
                             </Link>
                         </li>
+
+                        {/* Other Links */}
+                        {[
+                            { href: '/gallery', label: 'Gallery' },
+                            { href: '/about', label: 'About' },
+                            {
+                                href: session ? '/account' : '/account/login',
+                                label: session ? 'Account' : 'Log in',
+                            },
+                        ].map(({ href, label }) => (
+                            <li key={href} className=''>
+                                <Link
+                                    href={href}
+                                    aria-label={label}
+                                    onClick={closeSidebar}
+                                    className={`flex no-underline min-w-full px-[2em] py-[30px] text-[var(--nav-text)] transition-colors duration-200 hover:bg-[var(--nav-foreground)] ${
+                                        pathname === href
+                                            ? 'bg-[var(--nav-foreground)]'
+                                            : ''
+                                    }`}
+                                >
+                                    {label}
+                                </Link>
+                            </li>
+                        ))}
+
+                        {/* Cart Link */}
                         <li>
                             <Link
-                                href='/about'
-                                className={
-                                    pathname === '/about'
-                                        ? styles.activeLink + ' ' + styles.link
-                                        : styles.link
-                                }
-                                aria-label='About'
+                                href='/cart'
+                                aria-label='Cart'
+                                onClick={closeSidebar}
+                                className={`flex items-center no-underline min-w-full px-[2em] py-[30px] text-[var(--nav-text)] transition-colors duration-200 hover:bg-[var(--nav-foreground)] ${
+                                    pathname === '/cart'
+                                        ? 'bg-[var(--nav-foreground)]'
+                                        : ''
+                                }`}
                             >
-                                About
-                            </Link>
-                        </li>
-                        <li>
-                            {session ? (
-                                <Link
-                                    href='/account'
-                                    className={
-                                        pathname === '/account'
-                                            ? styles.activeLink +
-                                              ' ' +
-                                              styles.link
-                                            : styles.link
-                                    }
-                                    aria-label='Account'
-                                >
-                                    Account
-                                </Link>
-                            ) : (
-                                <Link
-                                    href='/account/login'
-                                    className={
-                                        pathname === '/account/login'
-                                            ? styles.activeLink +
-                                              ' ' +
-                                              styles.link
-                                            : styles.link
-                                    }
-                                    aria-label='Login'
-                                >
-                                    Log in
-                                </Link>
-                            )}
-                        </li>
-                        <li>
-                            {cart.length === 0 ? (
-                                <Link
-                                    href='/cart'
-                                    className={
-                                        pathname === '/cart'
-                                            ? styles.activeLink +
-                                              ' ' +
-                                              styles.link
-                                            : styles.link
-                                    }
-                                    aria-label='Cart'
-                                >
-                                    Cart
-                                </Link>
-                            ) : (
-                                <Link
-                                    href='/cart'
-                                    className={
-                                        pathname === '/cart'
-                                            ? styles.activeLink +
-                                              ' ' +
-                                              styles.link
-                                            : styles.link
-                                    }
-                                    aria-hidden='true'
-                                >
-                                    <span className='pr-2'> Cart </span>
+                                <span className='pr-2'>Cart</span>
+                                {cart.length > 0 && (
                                     <span className='bg-black text-white border-white border-2 text-xs font-bold px-2 py-0.5 rounded-full'>
                                         {cart.length}
                                     </span>
-                                </Link>
-                            )}
+                                )}
+                            </Link>
                         </li>
                     </ul>
                 </nav>
             </div>
-        </>
+        </div>
     )
 }
 

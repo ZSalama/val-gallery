@@ -2,16 +2,6 @@ import GalleryImageLink from '@/components/ui/imageComponent'
 
 export type GalleryImage = { title: string; src: string; url: string }
 
-const layout = [
-    { type: 'horizontal', indexes: [0, 1] },
-    { type: 'horizontal', indexes: [2, 3] },
-    { type: 'vertical', indexes: [4, 5, 6] },
-    { type: 'horizontal', indexes: [7, 8] },
-    { type: 'horizontal', indexes: [9, 10] },
-    { type: 'vertical', indexes: [11, 12, 13] },
-    { type: 'horizontal', indexes: [14, 15] },
-]
-
 export default function Gallery() {
     const images: GalleryImage[] = [
         {
@@ -97,35 +87,153 @@ export default function Gallery() {
     ]
 
     return (
-        <div className='bg-[rgb(32,32,32, 0)] relative z-50'>
-            <h1 className='text-4xl md:text-6xl font-bold text-center text-white mt-32 mb-8'>
+        <div className='w-full h-full'>
+            <h1 className='flex justify-center text-center font-bold text-4xl mt-24 md:mt-32 text-[var(--nav-text)]'>
                 Gallery
             </h1>
-
-            <div className='flex flex-col items-center justify-center'>
-                {layout.map((row, rowIndex) => (
-                    <div
-                        key={rowIndex}
-                        className={`mx-auto px-4 mb-16 flex flex-col md:flex-row items-center justify-center ${
-                            row.type === 'horizontal'
-                                ? 'gap-8 md:gap-32'
-                                : 'gap-8 md:gap-20'
-                        }`}
-                    >
-                        {row.indexes.map((i) => (
-                            <GalleryImageLink
-                                key={i}
-                                src={images[i].src}
-                                alt={images[i].title}
-                                width={row.type === 'horizontal' ? 960 : 720}
-                                height={row.type === 'horizontal' ? 720 : 960}
-                                loading={i === 0 ? 'eager' : 'lazy'}
-                                url={images[i].url}
-                                className='w-full h-full object-cover'
-                            />
-                        ))}
-                    </div>
-                ))}
+            <div className='flex flex-col items-center justify-center text-center mt-8'>
+                <div className='flex flex-col items-center justify-center gap-8 m-8 lg:flex-row my-4 px-0 md:px-0 lg:px-6'>
+                    <GalleryImageLink
+                        src={images[0].src}
+                        alt={images[0].title}
+                        width={960}
+                        height={720}
+                        loading='eager'
+                        url={images[0].url}
+                    />
+                    <GalleryImageLink
+                        src={images[1].src}
+                        alt={images[1].title}
+                        width={960}
+                        height={720}
+                        loading='lazy'
+                        url={images[1].url}
+                    />
+                </div>
+                <div className='flex flex-col items-center justify-center gap-8 m-8 lg:flex-row my-4 px-0 md:px-0 lg:px-6'>
+                    <GalleryImageLink
+                        src={images[2].src}
+                        alt={images[2].title}
+                        width={960}
+                        height={720}
+                        loading='lazy'
+                        url={images[2].url}
+                    />
+                    <GalleryImageLink
+                        src={images[3].src}
+                        alt={images[3].title}
+                        width={960}
+                        height={720}
+                        loading='lazy'
+                        url={images[3].url}
+                    />
+                </div>
+                <div className='flex flex-col items-center justify-center gap-8 m-8 lg:flex-row my-4'>
+                    <GalleryImageLink
+                        src={images[4].src}
+                        alt={images[4].title}
+                        width={720}
+                        height={960}
+                        loading='lazy'
+                        url={images[4].url}
+                    />
+                    <GalleryImageLink
+                        src={images[5].src}
+                        alt={images[5].title}
+                        width={720}
+                        height={960}
+                        loading='lazy'
+                        url={images[5].url}
+                    />
+                    <GalleryImageLink
+                        src={images[6].src}
+                        alt={images[6].title}
+                        width={720}
+                        height={960}
+                        loading='lazy'
+                        url={images[6].url}
+                    />
+                </div>
+                <div className='flex flex-col items-center justify-center gap-8 m-8 lg:flex-row my-4 px-0 md:px-0 lg:px-6'>
+                    <GalleryImageLink
+                        src={images[7].src}
+                        alt={images[7].title}
+                        width={960}
+                        height={720}
+                        loading='lazy'
+                        url={images[7].url}
+                    />
+                    <GalleryImageLink
+                        src={images[8].src}
+                        alt={images[8].title}
+                        width={960}
+                        height={720}
+                        loading='lazy'
+                        url={images[8].url}
+                    />
+                </div>
+                <div className='flex flex-col items-center justify-center gap-8 m-8 lg:flex-row my-4 px-0 md:px-0 lg:px-6'>
+                    <GalleryImageLink
+                        src={images[9].src}
+                        alt={images[9].title}
+                        width={960}
+                        height={720}
+                        loading='lazy'
+                        url={images[9].url}
+                    />
+                    <GalleryImageLink
+                        src={images[10].src}
+                        alt={images[10].title}
+                        width={960}
+                        height={720}
+                        loading='lazy'
+                        url={images[10].url}
+                    />
+                </div>
+                <div className='flex flex-col items-center justify-center gap-8 m-8 lg:flex-row my-4'>
+                    <GalleryImageLink
+                        src={images[11].src}
+                        alt={images[11].title}
+                        width={720}
+                        height={960}
+                        loading='lazy'
+                        url={images[11].url}
+                    />
+                    <GalleryImageLink
+                        src={images[12].src}
+                        alt={images[12].title}
+                        width={720}
+                        height={960}
+                        loading='lazy'
+                        url={images[12].url}
+                    />
+                    <GalleryImageLink
+                        src={images[13].src}
+                        alt={images[13].title}
+                        width={720}
+                        height={960}
+                        loading='lazy'
+                        url={images[13].url}
+                    />
+                </div>
+                <div className='flex flex-col items-center justify-center gap-8 m-8 lg:flex-row my-4 px-0 md:px-0 lg:px-6'>
+                    <GalleryImageLink
+                        src={images[14].src}
+                        alt={images[14].title}
+                        width={960}
+                        height={720}
+                        loading='lazy'
+                        url={images[14].url}
+                    />
+                    <GalleryImageLink
+                        src={images[15].src}
+                        alt={images[15].title}
+                        width={960}
+                        height={720}
+                        loading='lazy'
+                        url={images[15].url}
+                    />
+                </div>
             </div>
         </div>
     )
