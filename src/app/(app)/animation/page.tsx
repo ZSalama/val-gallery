@@ -5,7 +5,7 @@ import { useGLTF } from '@react-three/drei'
 import { useRef, useState, useMemo } from 'react'
 import * as THREE from 'three'
 
-export default function StarAnimation({ className }: { className?: string }) {
+export default function StarAnimation() {
     const [star, setStar] = useState({ x: 0, y: 0 })
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
