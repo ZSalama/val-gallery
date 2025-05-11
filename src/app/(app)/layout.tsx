@@ -11,6 +11,7 @@ export default function RootLayout({
     return (
         <div>
             {/* <BackgroundVideo /> */}
+            <div className='fixed inset-0  bg-white/5 backdrop-blur-sm pointer-events-none z-0' />
             {children}
             {/* <BackgroundAnimation /> */}
         </div>

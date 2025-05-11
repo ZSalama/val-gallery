@@ -2,38 +2,33 @@
 
 import { Canvas, useFrame } from '@react-three/fiber'
 import { useGLTF, PerspectiveCamera } from '@react-three/drei'
-import { useRef, useState, useEffect } from 'react'
+import { useRef, useState } from 'react'
 import * as THREE from 'three'
+import { EffectComposer, Bloom } from '@react-three/postprocessing'
 
-export default function StarAnimation() {
+export default function StarAnimation({
+    children,
+}: {
+    children?: React.ReactNode
+}) {
     const [star, setStar] = useState({ x: 0, y: 0 })
-    // const gltf = useGLTF('/stars_7.glb')
-
-    // useEffect(() => {
-    //     gltf.scene.traverse((obj) => {
-    //         if ((obj as THREE.Mesh).isMesh) {
-    //             const mesh = obj as THREE.Mesh
-    //             mesh.material = new THREE.MeshStandardMaterial({
-    //                 color: 0xffff00, // base color
-    //                 emissive: 0xffff33, // glowing yellow
-    //                 emissiveIntensity: 1.5, // boost the glow
-    //                 metalness: 0.1,
-    //                 roughness: 0.5,
-    //             })
-    //         }
-    //     })
-    // }, [gltf.scene])
+    const lastMove = useRef<number>(Date.now())
 
     const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
         const rect = e.currentTarget.getBoundingClientRect()
         const x = (((e.clientX - rect.left) / rect.width) * 2 - 1) / 2
         const y = (((e.clientY - rect.top) / rect.height) * 2) / 2
         setStar({ x, y })
+        lastMove.current = Date.now()
     }
 
     return (
         <>
-            <div className='fixed inset-0 z-10' onMouseMove={handleMouseMove}>
+            <div
+                className='fixed inset-0 z-10 bg-black'
+                onMouseMove={handleMouseMove}
+            >
+                <div className='absolute inset-0 bg-white/5 backdrop-blur-sm pointer-events-none z-10 h-full' />
                 <Canvas
                     shadows
                     gl={{ antialias: true }}
@@ -55,32 +50,34 @@ export default function StarAnimation() {
                         shadow-mapSize-width={1024}
                         shadow-mapSize-height={1024}
                     />
-                    <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-                        {/* <planeGeometry args={[20, 20]} /> */}
-                        {/* <shadowMaterial /> */}
-                    </mesh>
-
-                    <StarResponsiveModel star={star} />
-                    <meshStandardMaterial color='hotpink' />
+                    <StarResponsiveModel star={star} lastMove={lastMove} />
+                    <EffectComposer>
+                        <Bloom
+                            luminanceThreshold={0.2} // only glow the brightest parts
+                            luminanceSmoothing={0.1} // smooth transition
+                            intensity={1.5} // overall glow strength
+                            kernelSize={3} // how blurry the glow is
+                            // height={300} // resolution of the bloom buffer
+                        />
+                    </EffectComposer>
                 </Canvas>
             </div>
-            {/* <div className='relative min-h-screen mx-auto text-center text-4xl mt-60'>
-                Lorem, iiam veniam voluptatem repellendus minima nisi? Cumque
-                totam porro cum et?
-            </div> */}
+            {children}
         </>
     )
 }
 
 interface StarProps {
     star: { x: number; y: number }
+    lastMove: React.RefObject<number>
 }
 
-function StarResponsiveModel({ star }: StarProps) {
-    const gltf = useGLTF('/stars_9.glb')
+function StarResponsiveModel({ star, lastMove }: StarProps) {
+    const gltf = useGLTF('/stars_10.glb')
     const groupRef = useRef<THREE.Group>(null)
+    const targetScale = useRef(new THREE.Vector3(1, 1, 1))
 
-    useFrame(() => {
+    useFrame((state) => {
         if (!groupRef.current) return
         // Smooth rotation based on cursor
         const targetRotX = star.y * 0.5
@@ -90,6 +87,16 @@ function StarResponsiveModel({ star }: StarProps) {
         // groupRef.current.rotation.x = 0.2
         groupRef.current.rotation.y +=
             (targetRotY - groupRef.current.rotation.y) * 0.1
+        // 2) breathing when idle
+        const idle = Date.now() - lastMove.current > 1000 // 1 s idle
+        const t = state.clock.getElapsedTime()
+        const scaleFactor = idle
+            ? 1 + Math.sin(t * 2) * 0.05 // oscillate ±5%
+            : 1
+
+        targetScale.current.set(scaleFactor, scaleFactor, scaleFactor)
+        // smoothly lerp current scale → targetScale
+        groupRef.current.scale.lerp(targetScale.current, 0.1)
     })
 
     return (
@@ -106,4 +113,4 @@ function StarResponsiveModel({ star }: StarProps) {
     )
 }
 
-useGLTF.preload('/stars_9.glb')
+useGLTF.preload('/stars_10.glb')

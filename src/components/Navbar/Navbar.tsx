@@ -19,7 +19,9 @@ const Navbar = () => {
     const openSidebar = () => {
         setStyle((prev) => !prev)
     }
+
     // Scroll behavior: Show navbar when scrolling up, hide when scrolling down
+
     useEffect(() => {
         let timeout: NodeJS.Timeout
         const handleScroll = () => {
@@ -69,7 +71,7 @@ const Navbar = () => {
             <div
                 className={`${
                     styles.navContainer
-                } transition-transform duration-300 ${
+                } transition-transform duration-300 z-50${
                     showNavbar ? 'translate-y-0' : '-translate-y-full'
                 }`}
             >

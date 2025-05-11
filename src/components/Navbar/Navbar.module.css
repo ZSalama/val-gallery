@@ -9,6 +9,7 @@
     margin-right: auto; /* Pushes the home link to the left */
     display: flex;
     text-decoration: none;
+    z-index: 10;
 }
 
 .link {
@@ -129,6 +130,7 @@
     .home_link {
         margin-right: unset;
         margin-left: 0;
+        z-index: 10;
     }
 
     .overlay {

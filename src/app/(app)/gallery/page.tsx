@@ -1,8 +1,6 @@
-import styles from './page.module.css'
 import GalleryImageLink from '@/components/ui/imageComponent'
 
-// its not the worst thing ive seen
-// but its not the best either
+export type GalleryImage = { title: string; src: string; url: string }
 
 const layout = [
     { type: 'horizontal', indexes: [0, 1] },
@@ -13,8 +11,6 @@ const layout = [
     { type: 'vertical', indexes: [11, 12, 13] },
     { type: 'horizontal', indexes: [14, 15] },
 ]
-
-export type GalleryImage = { title: string; src: string; url: string }
 
 export default function Gallery() {
     const images: GalleryImage[] = [
@@ -53,7 +49,6 @@ export default function Gallery() {
             src: 'https://d2oeo8w8j25w98.cloudfront.net/lizard_fit.webp',
             url: 'gallery/lizard',
         },
-
         {
             title: 'butterfly.jpg',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/butterfly_fit.webp',
@@ -102,17 +97,20 @@ export default function Gallery() {
     ]
 
     return (
-        <div className={styles.gallery_container}>
-            <h1 className={styles.title}>Gallery</h1>
-            <div className={styles.wrapper}>
+        <div className='bg-[rgb(32,32,32, 0)] relative z-50'>
+            <h1 className='text-4xl md:text-6xl font-bold text-center text-white mt-32 mb-8'>
+                Gallery
+            </h1>
+
+            <div className='flex flex-col items-center justify-center'>
                 {layout.map((row, rowIndex) => (
                     <div
                         key={rowIndex}
-                        className={
+                        className={`mx-auto px-4 mb-16 flex flex-col md:flex-row items-center justify-center ${
                             row.type === 'horizontal'
-                                ? styles.grid_wrapper_horizontal
-                                : styles.grid_wrapper_vertical
-                        }
+                                ? 'gap-8 md:gap-32'
+                                : 'gap-8 md:gap-20'
+                        }`}
                     >
                         {row.indexes.map((i) => (
                             <GalleryImageLink
@@ -123,6 +121,7 @@ export default function Gallery() {
                                 height={row.type === 'horizontal' ? 720 : 960}
                                 loading={i === 0 ? 'eager' : 'lazy'}
                                 url={images[i].url}
+                                className='w-full h-full object-cover'
                             />
                         ))}
                     </div>

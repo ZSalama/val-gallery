@@ -5,6 +5,7 @@ import Navbar from '@/components/Navbar/Navbar'
 // import Footer from '@/components/Footer/Footer'
 import { CartProvider } from '@/context/CartContext'
 import { AuthProvider } from '@/context/AuthContext'
+import StarAnimation from '@/components/BackgroundAnimation/StarAnimation'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -33,8 +34,10 @@ export default function RootLayout({
             >
                 <AuthProvider>
                     <CartProvider>
-                        {/* <Navbar /> */}
+                        <Navbar />
+                        <StarAnimation />
                         {children}
+                        {/* {children} */}
                         {/* <Footer /> */}
                     </CartProvider>
                 </AuthProvider>

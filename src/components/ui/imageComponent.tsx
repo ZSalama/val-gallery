@@ -9,6 +9,7 @@ type GalleryImageLinkProps = {
     height: number
     url: string
     loading?: 'eager' | 'lazy'
+    className?: string
 }
 
 export default function GalleryImageLink({
@@ -18,11 +19,12 @@ export default function GalleryImageLink({
     height,
     url,
     loading = 'lazy',
+    className,
 }: GalleryImageLinkProps) {
     return (
         <div className={styles.image_wrapper}>
             <Image
-                className={styles.image}
+                className={className}
                 src={src}
                 alt={alt}
                 width={width}
