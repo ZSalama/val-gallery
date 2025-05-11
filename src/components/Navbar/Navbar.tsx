@@ -62,12 +62,12 @@ const Navbar = () => {
 
             {/* Navbar Container */}
             <div
-                className={`fixed top-0  left-0 w-full flex justify-center z-50 transition-transform duration-300 bg-black/50 ${
+                className={`fixed top-0  left-0 w-full flex justify-center z-[100] transition-transform duration-300 bg-[var(--nav-background)] ${
                     showNavbar ? 'translate-y-0' : '-translate-y-full'
                 }`}
             >
                 <nav
-                    className={`flex justify-between items-center max-w-[1550px] w-full transition-[right] duration-300 ease-out bg-transparent md:static md:top-auto md:right-auto md:h-auto md:w-full md:border-none ${
+                    className={`flex justify-between items-center max-w-[1550px]  transition-[right] duration-300 ease-out bg-[var(--nav-background)] md:static md:top-auto md:right-auto md:h-auto md:w-full md:border-none ${
                         sidebarOpen
                             ? 'fixed right-0 top-0 h-screen w-[min(15em,100%)] border-l border-[var(--hover-color)]'
                             : 'fixed -right-full top-0 h-screen w-[min(15em,100%)] border-l border-[var(--hover-color)]'
