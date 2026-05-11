@@ -1,7 +1,17 @@
 import { PrismaClient } from '@prisma/client'
+import { PrismaPg } from '@prisma/adapter-pg'
 
 const prismaClientSingleton = () => {
-    return new PrismaClient()
+    const connectionString = process.env.DATABASE_URL
+    if (!connectionString) {
+        throw new Error('Environment not set: DATABASE_URL')
+    }
+
+    const adapter = new PrismaPg({
+        connectionString,
+    })
+
+    return new PrismaClient({ adapter })
 }
 
 declare const globalThis: {

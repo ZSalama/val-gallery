@@ -1,20 +1,9 @@
 'use client'
 
 import { useEffect } from 'react'
-import { loadStripe } from '@stripe/stripe-js'
 import { redirect } from 'next/navigation'
 import { useCartContext } from '@/context/CartContext'
 import { authClient } from '@/lib/auth-client'
-
-// Make sure to call `loadStripe` outside of a component’s render to avoid
-// recreating the `Stripe` object on every render.
-if (!process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY) {
-    throw new Error(
-        'NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY is not set in environment variables'
-    )
-}
-
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY)
 
 export default function Cart() {
     const { data: userSession } = authClient.useSession()
@@ -45,8 +34,6 @@ export default function Cart() {
         if (userSession?.user.email === undefined) {
             redirect('/account/login')
         }
-        const stripe = await stripePromise
-
         const response = await fetch('/api/checkout', {
             method: 'POST',
             headers: {
@@ -60,10 +47,10 @@ export default function Cart() {
 
         const session = await response.json()
 
-        if (stripe) {
-            await stripe.redirectToCheckout({ sessionId: session.id })
+        if (session.url) {
+            window.location.assign(session.url)
         } else {
-            console.error('Stripe or session ID is not available')
+            console.error('Checkout URL is not available')
         }
     }
 

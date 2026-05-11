@@ -3,16 +3,6 @@ import prisma from '@/lib/prisma'
 
 const cookie_name = process.env.BETTER_COOKIE_NAME
 
-export async function generateStaticParams() {
-    const orders = await prisma.order.findMany({
-        select: { id: true },
-    })
-
-    return orders.map((order) => ({
-        id: order.id,
-    }))
-}
-
 export default async function OrderPage({
     params,
 }: {

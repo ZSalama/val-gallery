@@ -37,7 +37,7 @@ export default async function handler(
                 expand: ['line_items'],
                 customer_email: email,
             })
-            res.status(200).json({ id: session.id })
+            res.status(200).json({ id: session.id, url: session.url })
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
         } catch (err: any) {
