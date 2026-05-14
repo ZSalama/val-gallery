@@ -1,107 +1,250 @@
 'use client'
 
-import { useEffect } from 'react'
-import { redirect } from 'next/navigation'
+import { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/navigation'
+import {
+    ArrowRight,
+    PackageCheck,
+    ShieldCheck,
+    ShoppingBag,
+    Trash2,
+} from 'lucide-react'
 import { useCartContext } from '@/context/CartContext'
+import styles from './page.module.css'
+
+const freeShippingMinimum = 25
+
+const formatCurrency = (amount: number) =>
+    new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+    }).format(amount)
 
 export default function Cart() {
+    const router = useRouter()
     const { cart, removeItemFromCart, clearCart, getTotal } = useCartContext()
+    const [checkoutError, setCheckoutError] = useState('')
+    const [isCheckingOut, setIsCheckingOut] = useState(false)
+
+    const subtotal = getTotal()
+    const itemCount = cart.reduce((total, item) => total + item.quantity, 0)
+    const amountToFreeShipping = Math.max(freeShippingMinimum - subtotal, 0)
+    const hasItems = cart.length > 0
 
     useEffect(() => {
         const query = new URLSearchParams(window.location.search)
         if (query.get('success')) {
-            redirect('/success')
+            router.replace('/success')
         }
 
         if (query.get('canceled')) {
-            redirect('/canceled')
+            router.replace('/canceled')
         }
-    }, [])
+    }, [router])
 
     const handleCheckout = async (
         event: React.MouseEvent<HTMLButtonElement>
     ) => {
         event.preventDefault()
-        const response = await fetch('/api/checkout', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                items: cart,
-            }),
-        })
 
-        const session = await response.json()
+        if (!hasItems || isCheckingOut) {
+            return
+        }
 
-        if (session.url) {
-            window.location.assign(session.url)
-        } else {
-            console.error('Checkout URL is not available')
+        setCheckoutError('')
+        setIsCheckingOut(true)
+
+        try {
+            const response = await fetch('/api/checkout', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    items: cart,
+                }),
+            })
+
+            const session = await response.json()
+
+            if (!response.ok) {
+                throw new Error(
+                    typeof session === 'string'
+                        ? session
+                        : 'Checkout could not be started.'
+                )
+            }
+
+            if (session.url) {
+                window.location.assign(session.url)
+                return
+            }
+
+            throw new Error('Checkout URL is not available.')
+        } catch (error) {
+            setCheckoutError(
+                error instanceof Error
+                    ? error.message
+                    : 'Checkout could not be started.'
+            )
+            setIsCheckingOut(false)
         }
     }
 
     return (
-        <>
-            <div className='mt-32 max-w-xl mx-auto p-4'>
-                <div className='bg-gray-200 shadow rounded-lg p-6'>
-                    <h2 className='text-2xl font-bold mb-4'>Shopping Cart</h2>
-                    <div> __________________ </div>
-                    {cart.length === 0 ? (
-                        <p className='text-gray-600'>Your cart is empty</p>
-                    ) : (
-                        cart.map((item, index) => (
-                            <div
-                                key={index}
-                                className='flex justify-between items-center border-b border-gray-200 py-2 gap-5'
+        <main className={styles.cartPage}>
+            <section className={styles.hero}>
+                <p className={styles.eyebrow}>Shopping Cart</p>
+                <h1 className={styles.title}>Review your artwork order</h1>
+                <p className={styles.intro}>
+                    Cards are 5&quot; by 7&quot; and sold in packs of 4. Free
+                    shipping is available on orders over $25.
+                </p>
+            </section>
+
+            <section className={styles.cartShell} aria-label='Shopping cart'>
+                <div className={styles.itemsPanel}>
+                    <div className={styles.panelHeader}>
+                        <div>
+                            <h2>Your Cart</h2>
+                            <p>
+                                {hasItems
+                                    ? `${itemCount} ${itemCount === 1 ? 'item' : 'items'} selected`
+                                    : 'No items selected yet'}
+                            </p>
+                        </div>
+                        {hasItems && (
+                            <button
+                                type='button'
+                                className={styles.clearButton}
+                                onClick={() => clearCart()}
                             >
-                                <p className='text-gray-800'>
-                                    {item.name} -{' '}
-                                    <span className='font-semibold'>
-                                        {item.quantity}
-                                    </span>{' '}
-                                    x ${item.cost}
-                                </p>
-                                <button
-                                    onClick={() => removeItemFromCart(item.id)}
-                                    className='bg-gray-600 hover:bg-gray-800 text-white hover:text-gray-200 px-3 py-1 rounded'
-                                >
-                                    Remove
-                                </button>
-                            </div>
-                        ))
+                                Clear cart
+                            </button>
+                        )}
+                    </div>
+
+                    {hasItems ? (
+                        <ul className={styles.itemList}>
+                            {cart.map((item) => (
+                                <li key={item.id} className={styles.cartItem}>
+                                    <div className={styles.itemArt}>
+                                        <ShoppingBag
+                                            aria-hidden='true'
+                                            size={26}
+                                            strokeWidth={1.8}
+                                        />
+                                    </div>
+                                    <div className={styles.itemDetails}>
+                                        <div>
+                                            <h3>{item.name}</h3>
+                                            <p>
+                                                {formatCurrency(item.cost)} per
+                                                pack
+                                            </p>
+                                        </div>
+                                        <div className={styles.itemMeta}>
+                                            <span>Qty {item.quantity}</span>
+                                            <strong>
+                                                {formatCurrency(
+                                                    item.cost * item.quantity
+                                                )}
+                                            </strong>
+                                        </div>
+                                    </div>
+                                    <button
+                                        type='button'
+                                        className={styles.removeButton}
+                                        onClick={() =>
+                                            removeItemFromCart(item.id)
+                                        }
+                                        aria-label={`Remove ${item.name} from cart`}
+                                        title={`Remove ${item.name}`}
+                                    >
+                                        <Trash2
+                                            aria-hidden='true'
+                                            size={18}
+                                            strokeWidth={2}
+                                        />
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    ) : (
+                        <div className={styles.emptyState}>
+                            <ShoppingBag aria-hidden='true' size={34} />
+                            <h2>Your cart is empty</h2>
+                            <p>
+                                Browse the gallery and add card packs when you
+                                find a piece you want to order.
+                            </p>
+                            <Link href='/gallery' className={styles.secondaryLink}>
+                                Browse gallery
+                            </Link>
+                        </div>
                     )}
-                    <div> ---------------- </div>
-                    <div> Subtotal: ${getTotal()}</div>
                 </div>
 
-                <section className='mt-6 flex justify-between'>
+                <aside className={styles.summaryPanel} aria-label='Order summary'>
+                    <div className={styles.summaryHeader}>
+                        <h2>Order Summary</h2>
+                        <span>{formatCurrency(subtotal)}</span>
+                    </div>
+
+                    <div className={styles.summaryRows}>
+                        <div className={styles.summaryRow}>
+                            <span>Subtotal</span>
+                            <strong>{formatCurrency(subtotal)}</strong>
+                        </div>
+                        <div className={styles.summaryRow}>
+                            <span>Shipping</span>
+                            <strong>
+                                {subtotal >= freeShippingMinimum
+                                    ? 'Free'
+                                    : 'Calculated at checkout'}
+                            </strong>
+                        </div>
+                    </div>
+
+                    <div className={styles.shippingCallout}>
+                        <PackageCheck aria-hidden='true' size={20} />
+                        <p>
+                            {subtotal >= freeShippingMinimum
+                                ? 'Free shipping is ready for this order.'
+                                : `${formatCurrency(amountToFreeShipping)} away from free shipping.`}
+                        </p>
+                    </div>
+
                     <button
+                        type='button'
+                        className={styles.checkoutButton}
                         onClick={handleCheckout}
-                        className='bg-gray-800 hover:bg-gray-200 text-gray-200 hover:text-gray-800 font-semibold px-4 py-2 rounded border-2'
+                        disabled={!hasItems || isCheckingOut}
                     >
-                        Checkout
+                        <span>
+                            {isCheckingOut
+                                ? 'Starting checkout'
+                                : 'Checkout securely'}
+                        </span>
+                        <ArrowRight aria-hidden='true' size={19} />
                     </button>
-                    <button
-                        onClick={() => clearCart()}
-                        className='bg-gray-600 hover:bg-gray-800 text-white font-semibold px-4 py-2 rounded border-2'
-                    >
-                        Clear Cart
-                    </button>
-                </section>
-            </div>
-            <p className='bg-gray-200 max-w-xl mx-auto p-4 mt-4 rounded-lg shadow'>
-                <strong>Note:</strong> Free shipping on orders over $25.00.
-            </p>
-            <p className='bg-gray-200 max-w-xl mx-auto p-4 mt-4 rounded-lg shadow'>
-                <strong>Note:</strong> Cards come in size 5&quot; by 7&quot; and
-                packs of 4.
-            </p>
-            <p className='bg-gray-200 max-w-xl mx-auto p-4 mt-4 rounded-lg shadow'>
-                <strong>Note:</strong> This is a test version of the checkout
-                process. You will not be charged. Use the test card number: 4242
-                4242 4242 4242
-            </p>
-        </>
+
+                    {checkoutError && (
+                        <p className={styles.errorMessage} role='alert'>
+                            {checkoutError}
+                        </p>
+                    )}
+
+                    <div className={styles.checkoutNote}>
+                        <ShieldCheck aria-hidden='true' size={18} />
+                        <p>
+                            Test checkout is enabled. You will not be charged;
+                            use card number 4242 4242 4242 4242.
+                        </p>
+                    </div>
+                </aside>
+            </section>
+        </main>
     )
 }
