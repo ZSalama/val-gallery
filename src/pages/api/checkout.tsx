@@ -12,7 +12,8 @@ export default async function handler(
     res: NextApiResponse
 ) {
     if (req.method === 'POST') {
-        const { items, email }: { items: CartItem[]; email: string } = req.body
+        const { items, email }: { items: CartItem[]; email?: string } =
+            req.body
 
         if (!items || !Array.isArray(items)) {
             return res.status(400).json({ error: 'Invalid items' })
@@ -23,7 +24,7 @@ export default async function handler(
         }))
 
         try {
-            const session = await stripe.checkout.sessions.create({
+            const sessionOptions: Stripe.Checkout.SessionCreateParams = {
                 shipping_address_collection: {
                     allowed_countries: ['US'],
                 },
@@ -33,8 +34,15 @@ export default async function handler(
                 success_url: `${req.headers.origin}/cart/?success=true`,
                 cancel_url: `${req.headers.origin}/cart/?canceled=true`,
                 expand: ['line_items'],
-                customer_email: email,
-            })
+            }
+
+            if (email) {
+                sessionOptions.customer_email = email
+            }
+
+            const session = await stripe.checkout.sessions.create(
+                sessionOptions
+            )
             res.status(200).json({ id: session.id, url: session.url })
 
             // eslint-disable-next-line @typescript-eslint/no-explicit-any

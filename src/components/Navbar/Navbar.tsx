@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react'
 import styles from './Navbar.module.css'
 import { usePathname } from 'next/navigation'
 import { useCartContext } from '@/context/CartContext'
-import { useAuth } from '@/context/AuthContext'
 
 const Navbar = () => {
     const { cart } = useCartContext()
@@ -12,7 +11,6 @@ const Navbar = () => {
     const [style, setStyle] = useState(false)
     const [lastScrollY, setLastScrollY] = useState(0)
     const [showNavbar, setShowNavbar] = useState(true)
-    const { session } = useAuth()
 
     // if (loading) return null
 
@@ -157,37 +155,6 @@ const Navbar = () => {
                             >
                                 About
                             </Link>
-                        </li>
-                        <li>
-                            {session ? (
-                                <Link
-                                    href='/account'
-                                    className={
-                                        pathname === '/account'
-                                            ? styles.activeLink +
-                                              ' ' +
-                                              styles.link
-                                            : styles.link
-                                    }
-                                    aria-label='Account'
-                                >
-                                    Account
-                                </Link>
-                            ) : (
-                                <Link
-                                    href='/account/login'
-                                    className={
-                                        pathname === '/account/login'
-                                            ? styles.activeLink +
-                                              ' ' +
-                                              styles.link
-                                            : styles.link
-                                    }
-                                    aria-label='Login'
-                                >
-                                    Log in
-                                </Link>
-                            )}
                         </li>
                         <li>
                             {cart.length === 0 ? (

@@ -2,39 +2,22 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding-top: 5rem; */
-    margin-top: 4rem;
-}
-
-.image_wrapper {
-    position: relative;
-    display: flex;
-}
-
-.image_overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0); /* Transparent overlay */
-    z-index: 1;
+    margin-top: 4rem;
+    padding: 0 1rem 4rem;
 }
 
-.carousel {
-    min-width: 20rem;
-    max-width: 60rem;
-    max-height: 90rem;
-    padding: 0rem 4rem 0rem 4rem;
-    /* border: 2px solid red; */
-    margin: 0rem 0.5rem 1rem 0.5rem;
+.image_panel {
+    width: 100%;
+    max-width: 46rem;
+    margin: 0 auto 1.5rem;
 }
 
 .image {
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    /* border: 1rem solid white; */
+    height: auto;
+    display: block;
+    object-fit: contain;
 }
 
 .title {
@@ -42,15 +25,13 @@
 }
 
 .description {
-    flex: 3;
-    /* max-width: 50%; */
-    padding: 1rem 2rem 2rem 2rem;
-    margin: 1rem;
+    width: 100%;
+    max-width: 48rem;
+    margin: 0 auto;
     color: white;
-    max-width: max(75%, 25rem);
     background-color: rgba(0, 0, 0, 0.5);
     padding: 1.5rem;
-    border-radius: 2rem;
+    border-radius: 0.5rem;
 }
 
 .blurb {
@@ -89,37 +70,14 @@
 @media screen and (min-width: 800px) {
     .gallery_wrapper {
         margin-top: 6rem;
+        padding-right: 2rem;
+        padding-left: 2rem;
     }
 }
 
 @media screen and (min-width: 1200px) {
     .gallery_wrapper {
-        flex-direction: row;
-        justify-content: center;
-        align-items: normal;
-        padding-top: 5rem;
-        padding-bottom: 10rem;
-        min-height: calc(100vh - 9vh);
-    }
-
-    .description {
-        flex: 1;
-        max-width: 25rem;
-        min-width: 20rem;
-        height: 100%;
-        margin-top: 0rem;
-        /* padding: 4rem 2rem 0rem 0rem;
-        margin-right: 3rem; */
-    }
-
-    .carousel {
-        flex: 1;
-        /* padding-top: 4rem; */
-        /* margin-right: 5rem;
-        margin-left: 5rem; */
-        margin: 0rem 4rem 1rem 4rem;
-        max-width: 43rem;
-
-        aspect-ratio: 1/1;
+        padding-top: 3rem;
+        padding-bottom: 6rem;
     }
 }

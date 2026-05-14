@@ -3,11 +3,8 @@
 import { useEffect } from 'react'
 import { redirect } from 'next/navigation'
 import { useCartContext } from '@/context/CartContext'
-import { authClient } from '@/lib/auth-client'
 
 export default function Cart() {
-    const { data: userSession } = authClient.useSession()
-
     const { cart, removeItemFromCart, clearCart, getTotal } = useCartContext()
 
     useEffect(() => {
@@ -25,9 +22,6 @@ export default function Cart() {
         event: React.MouseEvent<HTMLButtonElement>
     ) => {
         event.preventDefault()
-        if (userSession?.user.email === undefined) {
-            redirect('/account/login')
-        }
         const response = await fetch('/api/checkout', {
             method: 'POST',
             headers: {
@@ -35,7 +29,6 @@ export default function Cart() {
             },
             body: JSON.stringify({
                 items: cart,
-                email: userSession?.user.email,
             }),
         })
 

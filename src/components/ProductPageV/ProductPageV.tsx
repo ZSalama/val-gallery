@@ -1,14 +1,8 @@
 'use client'
 import styles from './items-v.module.css'
 import Image from 'next/image'
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from '@/components/ui/carousel'
 import AddItemToCart from '@/components/ui/AddItemToCard'
+import ScrollReveal from '@/components/ScrollReveal/ScrollReveal'
 import { useState } from 'react'
 
 type Product = {
@@ -42,43 +36,22 @@ export default function ProductPageV({ product }: { product: Product }) {
     }
 
     const [selectedType, setSelectedType] = useState('Poster')
+    const selectedImage =
+        selectedType === 'Poster' ? product.url_poster : product.url_card
 
     return (
         <div className={styles.gallery_wrapper}>
-            <div className={styles.carousel}>
-                <Carousel>
-                    <CarouselContent>
-                        <CarouselItem>
-                            <div className={styles.image_wrapper}>
-                                <Image
-                                    src={product.url_poster}
-                                    alt={`${product.name} poster`}
-                                    width={960}
-                                    height={720}
-                                    className={styles.image}
-                                    quality={75}
-                                />
-                                <div className={styles.image_overlay}></div>
-                            </div>
-                        </CarouselItem>
-                        <CarouselItem>
-                            <div className={styles.image_wrapper}>
-                                <Image
-                                    src={product.url_card}
-                                    alt={`${product.name} card`}
-                                    width={960}
-                                    height={720}
-                                    className={styles.image}
-                                    quality={75}
-                                />
-                                <div className={styles.image_overlay}></div>
-                            </div>
-                        </CarouselItem>
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                </Carousel>
-            </div>
+            <ScrollReveal className={styles.image_panel}>
+                <Image
+                    src={selectedImage}
+                    alt={`${product.name} ${selectedType.toLowerCase()}`}
+                    width={720}
+                    height={960}
+                    className={styles.image}
+                    quality={85}
+                    priority
+                />
+            </ScrollReveal>
 
             <div className={styles.description}>
                 <h1 className={styles.title}>{product.name}</h1>
