@@ -7,22 +7,16 @@ import { authClient } from '@/lib/auth-client'
 
 export default function Cart() {
     const { data: userSession } = authClient.useSession()
-    // console.log('userSession', userSession?.user.email)
 
     const { cart, removeItemFromCart, clearCart, getTotal } = useCartContext()
 
     useEffect(() => {
-        // Check to see if this is a redirect back from Checkout
         const query = new URLSearchParams(window.location.search)
         if (query.get('success')) {
-            console.log('Order placed! You will receive an email confirmation.')
             redirect('/success')
         }
 
         if (query.get('canceled')) {
-            console.log(
-                'Order canceled -- continue to shop around and checkout when you are ready.'
-            )
             redirect('/canceled')
         }
     }, [])

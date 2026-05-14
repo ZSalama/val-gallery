@@ -23,8 +23,6 @@ export default async function handler(
         }))
 
         try {
-            // console.log(lineItems)
-            // Create Checkout Sessions from body params.
             const session = await stripe.checkout.sessions.create({
                 shipping_address_collection: {
                     allowed_countries: ['US'],

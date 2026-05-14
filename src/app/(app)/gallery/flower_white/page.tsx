@@ -1,5 +1,11 @@
 import ProductPageV from '@/components/ProductPageH/ProductPageH'
 
+export const metadata = {
+    title: 'White Flowers',
+    description:
+        'White Flowers by Valerie Anne Barber, available as a poster or card set.',
+}
+
 export default function Flower_white() {
     return (
         <ProductPageV

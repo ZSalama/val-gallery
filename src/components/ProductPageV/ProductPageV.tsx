@@ -1,4 +1,3 @@
-// import React from 'react'
 'use client'
 import styles from './items-v.module.css'
 import Image from 'next/image'
@@ -53,7 +52,7 @@ export default function ProductPageV({ product }: { product: Product }) {
                             <div className={styles.image_wrapper}>
                                 <Image
                                     src={product.url_poster}
-                                    alt={product.id_poster}
+                                    alt={`${product.name} poster`}
                                     width={960}
                                     height={720}
                                     className={styles.image}
@@ -66,7 +65,7 @@ export default function ProductPageV({ product }: { product: Product }) {
                             <div className={styles.image_wrapper}>
                                 <Image
                                     src={product.url_card}
-                                    alt={product.id_card}
+                                    alt={`${product.name} card`}
                                     width={960}
                                     height={720}
                                     className={styles.image}

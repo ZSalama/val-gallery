@@ -3,86 +3,92 @@ import GalleryImageLink from '@/components/ui/imageComponent'
 
 export type GalleryImage = { title: string; src: string; url: string }
 
+export const metadata = {
+    title: 'Gallery',
+    description:
+        'Browse artwork by Valerie Anne Barber, including prints, postcards, and card sets.',
+}
+
 export default function Gallery() {
     const images: GalleryImage[] = [
         {
-            title: 'flower_green.jpg',
+            title: 'Green Flowers',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/flower_green_fit.webp',
             url: 'gallery/flower_green',
         },
         {
-            title: 'flower_white.jpg',
+            title: 'White Flowers',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/flower_white_fit.webp',
             url: 'gallery/flower_white',
         },
         {
-            title: 'tree_3.jpg',
+            title: 'Autumn Tree',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/tree_3_fit.webp',
             url: 'gallery/tree_3',
         },
         {
-            title: 'horse_gallery.jpg',
+            title: 'Horse Gallery',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/horse_gallery_fit.webp',
             url: 'gallery/horse_gallery',
         },
         {
-            title: 'horse_red.jpg',
+            title: 'Red Horse',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/horse_red_fit.webp',
             url: 'gallery/horse_red',
         },
         {
-            title: 'tree_2.jpg',
+            title: 'White Trees',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/tree_2_fit.webp',
             url: 'gallery/tree_2',
         },
         {
-            title: 'lizard.jpg',
+            title: 'Lizard',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/lizard_fit.webp',
             url: 'gallery/lizard',
         },
 
         {
-            title: 'butterfly.jpg',
+            title: 'Butterfly',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/butterfly_fit.webp',
             url: 'gallery/butterfly',
         },
         {
-            title: 'egg.jpg',
+            title: 'Eggs',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/egg_fit.webp',
             url: 'gallery/egg',
         },
         {
-            title: 'humming_bird.jpg',
+            title: 'Hummingbird',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/humming_bird_fit.webp',
             url: 'gallery/humming_bird',
         },
         {
-            title: 'bamboo.jpg',
+            title: 'Bamboo',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/bamboo_fit.webp',
             url: 'gallery/bamboo',
         },
         {
-            title: 'flower_yellow.jpg',
+            title: 'Yellow Flowers',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/flower_yellow_fit.webp',
             url: 'gallery/flower_yellow',
         },
         {
-            title: 'wheel.jpg',
+            title: 'Wheel',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/wheel_fit.webp',
             url: 'gallery/wheel',
         },
         {
-            title: 'snake.jpg',
+            title: 'Tree with Snake',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/snake_fit.webp',
             url: 'gallery/snake',
         },
         {
-            title: 'tree_1.jpg',
+            title: 'Light Trees',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/tree_1_fit.webp',
             url: 'gallery/tree_1',
         },
         {
-            title: 'model_1.jpg',
+            title: 'Model',
             src: 'https://d2oeo8w8j25w98.cloudfront.net/model_1_fit.webp',
             url: 'gallery/model_1',
         },

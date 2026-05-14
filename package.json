@@ -1,6 +1,7 @@
 {
 	"name": "val-gallery",
 	"version": "0.1.0",
+	"description": "Artwork gallery and e-commerce site for Valerie Anne Barber.",
 	"private": true,
 	"type": "module",
 	"scripts": {

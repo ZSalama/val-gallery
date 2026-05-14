@@ -1,5 +1,11 @@
 import ProductPageV from '@/components/ProductPageH/ProductPageH'
 
+export const metadata = {
+    title: 'Model',
+    description:
+        'Model by Valerie Anne Barber, available as a poster or card set.',
+}
+
 export default function Model_1() {
     return (
         <ProductPageV
@@ -15,7 +21,7 @@ export default function Model_1() {
                     'https://d2oeo8w8j25w98.cloudfront.net/model_1_framed.jpg',
                 price_id_card: 'price_1R9xayGhmoGg54MozHpTvDxj',
                 cost_card: 10,
-                blurb: 'Model Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta in eum nobis. Dolore veritatis mollitia, voluptas reprehenderit assumenda libero officiis, inventore modi necessitatibus qui aliquid quae, amet laboriosam natus nisi? Quis dolore eius sed ducimus quae minima amet quisquam vitae aperiam officiis earum, distinctio, id, veritatis excepturi ratione doloribus laudantium.',
+                blurb: 'Model is a composed figure study from the gallery collection. Select it as a poster or as a card set.',
             }}
         />
     )

@@ -1,5 +1,11 @@
 import ProductPageV from '@/components/ProductPageV/ProductPageV'
 
+export const metadata = {
+    title: 'Red Horse',
+    description:
+        'Red Horse by Valerie Anne Barber, available as a poster or card set.',
+}
+
 export default function Horse_red() {
     return (
         <ProductPageV
@@ -15,7 +21,7 @@ export default function Horse_red() {
                     'https://d2oeo8w8j25w98.cloudfront.net/horse_red_framed.jpg',
                 price_id_card: 'price_1R9vXdGhmoGg54MoHVoH9Kjl',
                 cost_card: 10,
-                blurb: 'Red Horse Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta in eum nobis. Dolore veritatis mollitia, voluptas reprehenderit assumenda libero officiis, inventore modi necessitatibus qui aliquid quae, amet laboriosam natus nisi? Quis dolore eius sed ducimus quae minima amet quisquam vitae aperiam officiis earum, distinctio, id, veritatis excepturi ratione doloribus laudantium.',
+                blurb: 'Red Horse brings strong color and movement to the gallery collection. It is available as a poster or as a 5 by 7 card set.',
             }}
         />
     )
