@@ -24,6 +24,10 @@
     text-align: center;
 }
 
+.hero_text {
+    animation: heroFadeUp 700ms ease-out both;
+}
+
 .subtitle {
     text-align: center;
 }
@@ -34,6 +38,7 @@
     justify-content: center;
     padding: 1rem;
     margin-top: 1rem;
+    animation: heroFadeUp 700ms ease-out 180ms both;
 }
 
 .hero_button {
@@ -50,6 +55,25 @@
 
 .hero_button:hover {
     background-color: var(--nav-foreground);
+}
+
+@keyframes heroFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(18px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero_text,
+    .hero_buttons {
+        animation: none;
+    }
 }
 
 @media (min-width: 701px) {
