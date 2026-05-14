@@ -2,13 +2,6 @@
 'use client'
 import styles from './items-h.module.css'
 import Image from 'next/image'
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-} from '@/components/ui/carousel'
 import AddItemToCart from '@/components/ui/AddItemToCard'
 import { useState } from 'react'
 
@@ -46,39 +39,16 @@ export default function ProductPageH({ product }: { product: Product }) {
 
     return (
         <div className={styles.gallery_wrapper}>
-            <div className={styles.carousel}>
-                <Carousel>
-                    <CarouselContent>
-                        <CarouselItem>
-                            <div className={styles.image_wrapper}>
-                                <Image
-                                    src={product.url_poster}
-                                    alt={product.id_poster}
-                                    width={960}
-                                    height={720}
-                                    className={styles.image}
-                                    quality={75}
-                                />
-                                <div className={styles.image_overlay}></div>
-                            </div>
-                        </CarouselItem>
-                        <CarouselItem>
-                            <div className={styles.image_wrapper}>
-                                <Image
-                                    src={product.url_card}
-                                    alt={product.id_card}
-                                    width={960}
-                                    height={720}
-                                    className={styles.image}
-                                    quality={75}
-                                />
-                                <div className={styles.image_overlay}></div>
-                            </div>
-                        </CarouselItem>
-                    </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
-                </Carousel>
+            <div className={styles.image_panel}>
+                <Image
+                    src={product.url_poster}
+                    alt={product.id_poster}
+                    width={960}
+                    height={720}
+                    className={styles.image}
+                    quality={85}
+                    priority
+                />
             </div>
 
             <div className={styles.description}>
