@@ -40,21 +40,32 @@ export default async function handler(
         )
         console.log('Session:', session)
         if (!session) {
-            console.error('Order not found')
-            return
+            return res.status(404).json({ error: 'Order not found' })
         }
         if (session.line_items) {
             console.log('order line items: ', session.line_items)
             console.log('order line items data: ', session.line_items.data)
         } else {
-            return console.error('No line items found')
+            return res.status(400).json({ error: 'No line items found' })
         }
+        const customerEmail =
+            session.customer_email ?? session.customer_details?.email
+
+        if (!customerEmail) {
+            return res.status(200).json({
+                skipped: true,
+                reason: 'Checkout session did not include a customer email',
+            })
+        }
+
         const user = await prisma.user.findUnique({
-            where: { email: session.customer_email ?? undefined },
+            where: { email: customerEmail },
         })
         if (!user) {
-            console.error('User not found')
-            return
+            return res.status(200).json({
+                skipped: true,
+                reason: 'No account user found for checkout email',
+            })
         }
         // console.log('User:', user.email)
         const address = await prisma.address.create({
