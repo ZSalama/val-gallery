@@ -10,7 +10,7 @@
 .image_panel {
     width: 100%;
     max-width: 46rem;
-    margin: 0 auto 1.5rem;
+    margin: 0 auto 1.75rem;
 }
 
 .image {
@@ -21,50 +21,131 @@
 }
 
 .title {
-    text-align: center;
+    margin: 0;
+    color: #ffffff;
+    font-size: clamp(2rem, 5vw, 3.75rem);
+    line-height: 0.95;
+    letter-spacing: 0;
+    text-align: left;
 }
 
 .description {
     width: 100%;
-    max-width: 48rem;
+    max-width: 52rem;
     margin: 0 auto;
-    color: white;
-    background-color: rgba(0, 0, 0, 0.5);
-    padding: 1.5rem;
-    border-radius: 0.5rem;
+    color: rgba(226, 232, 240, 0.86);
+    background:
+        linear-gradient(
+            180deg,
+            rgba(15, 23, 42, 0.84),
+            rgba(7, 10, 16, 0.9)
+        );
+    padding: clamp(1.25rem, 3vw, 2rem);
+    border: 1px solid rgba(226, 232, 240, 0.18);
+    border-radius: 8px;
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.34),
+        0 1px 0 rgba(255, 255, 255, 0.1) inset;
+}
+
+.descriptionHeader {
+    display: grid;
+    gap: 0.6rem;
+}
+
+.kicker {
+    margin: 0;
+    color: #f2c16d;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
 }
 
 .blurb {
+    margin: 1.15rem 0 0;
+    color: rgba(226, 232, 240, 0.8);
+    font-size: clamp(1rem, 2vw, 1.12rem);
+    line-height: 1.7;
     text-align: left;
+}
+
+.purchaseSummary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: 1.4rem;
+    overflow: hidden;
+    border: 1px solid rgba(226, 232, 240, 0.16);
+    border-radius: 8px;
+    background: rgba(226, 232, 240, 0.14);
+}
+
+.purchaseSummary div {
+    min-width: 0;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.06);
+}
+
+.metaLabel {
+    display: block;
+    margin-bottom: 0.3rem;
+    color: rgba(226, 232, 240, 0.58);
+    font-size: 0.74rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+.purchaseSummary strong {
+    display: block;
+    color: #ffffff;
+    font-size: 1.12rem;
+    line-height: 1.2;
 }
 
 /* Toggle Buttons Styling */
 .toggleButtons {
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
+    gap: 0.75rem;
+    margin-top: 1.25rem;
     justify-content: center;
     align-items: center;
 }
 
 .toggleButtons button {
     background: transparent;
-    border: 2px solid #fff;
+    border: 1px solid rgba(226, 232, 240, 0.42);
     color: #fff;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
+    min-height: 44px;
+    flex: 1;
+    padding: 0 1rem;
+    border-radius: 6px;
     margin-bottom: 1rem;
     cursor: pointer;
-    transition: background 0.3s, color 0.3s;
+    font-weight: 700;
+    transition:
+        background 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease,
+        transform 180ms ease;
 }
 
 .toggleButtons button:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.14);
+    border-color: rgba(226, 232, 240, 0.7);
+    transform: translateY(-1px);
+}
+
+.toggleButtons button:focus-visible {
+    outline: 3px solid var(--nav-active);
+    outline-offset: 3px;
 }
 
 .toggleButtons button.active {
-    background: #fff;
-    color: #000;
+    background: #f2c16d;
+    border-color: #f2c16d;
+    color: #151515;
 }
 
 @media screen and (min-width: 800px) {
@@ -79,5 +160,19 @@
     .gallery_wrapper {
         padding-top: 3rem;
         padding-bottom: 6rem;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .purchaseSummary {
+        grid-template-columns: 1fr;
+    }
+
+    .toggleButtons {
+        flex-direction: column;
+    }
+
+    .toggleButtons button {
+        width: 100%;
     }
 }

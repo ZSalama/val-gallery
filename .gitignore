@@ -42,3 +42,7 @@ yarn-error.log*
 next-env.d.ts
 
 notes.txt
+
+.agent.pid
+.agent.env
+.agent.dev.log
