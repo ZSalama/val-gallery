@@ -2,9 +2,9 @@ import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar/Navbar'
-// import Footer from '@/components/Footer/Footer'
 import { CartProvider } from '@/context/CartContext'
 import { AuthProvider } from '@/context/AuthContext'
+import { siteDescription, siteName, siteUrl } from '@/lib/site'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -17,8 +17,40 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-    title: 'Art Gallery',
-    description: 'A place to purchase beautiful art',
+    metadataBase: new URL(siteUrl),
+    applicationName: siteName,
+    title: {
+        default: siteName,
+        template: `%s | ${siteName}`,
+    },
+    description: siteDescription,
+    alternates: {
+        canonical: '/',
+    },
+    openGraph: {
+        type: 'website',
+        locale: 'en_US',
+        url: siteUrl,
+        siteName,
+        title: siteName,
+        description: siteDescription,
+        images: [
+            {
+                url: 'https://d2oeo8w8j25w98.cloudfront.net/horse_gallery_hd.webp',
+                width: 1200,
+                height: 900,
+                alt: 'Artwork from Valerie Anne Barber Gallery',
+            },
+        ],
+    },
+    twitter: {
+        card: 'summary_large_image',
+        title: siteName,
+        description: siteDescription,
+        images: [
+            'https://d2oeo8w8j25w98.cloudfront.net/horse_gallery_hd.webp',
+        ],
+    },
 }
 
 export default function RootLayout({
@@ -35,7 +67,6 @@ export default function RootLayout({
                     <CartProvider>
                         <Navbar />
                         {children}
-                        {/* <Footer /> */}
                     </CartProvider>
                 </AuthProvider>
             </body>

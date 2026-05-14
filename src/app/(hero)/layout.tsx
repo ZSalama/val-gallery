@@ -11,7 +11,7 @@ export default function RootLayout({
             <div className='backgroundImageContainer'>
                 <Image
                     src='https://d2oeo8w8j25w98.cloudfront.net/horse_gallery_hd.webp'
-                    alt='Background'
+                    alt='Horse Gallery artwork'
                     fill={true}
                     quality={75}
                     style={{ zIndex: -1, objectFit: 'cover' }}
@@ -19,7 +19,6 @@ export default function RootLayout({
                 />
             </div>
             {children}
-            {/* <Footer /> */}
         </>
     )
 }

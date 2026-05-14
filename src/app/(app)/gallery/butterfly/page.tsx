@@ -1,5 +1,11 @@
 import ProductPageV from '@/components/ProductPageH/ProductPageH'
 
+export const metadata = {
+    title: 'Butterfly',
+    description:
+        'Butterfly by Valerie Anne Barber, available as a poster or card set.',
+}
+
 export default function Butterfly() {
     return (
         <ProductPageV
@@ -15,7 +21,7 @@ export default function Butterfly() {
                     'https://d2oeo8w8j25w98.cloudfront.net/butterfly_framed.jpg',
                 price_id_card: 'price_1R9v9HGhmoGg54MoL28GS30r',
                 cost_card: 10,
-                blurb: 'Butterfly Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta in eum nobis. Dolore veritatis mollitia, voluptas reprehenderit assumenda libero officiis, inventore modi necessitatibus qui aliquid quae, amet laboriosam natus nisi? Quis dolore eius sed ducimus quae minima amet quisquam vitae aperiam officiis earum, distinctio, id, veritatis excepturi ratione doloribus laudantium.',
+                blurb: 'Butterfly adds a light, graceful subject to the collection. It is available as a poster or as a 5 by 7 card set.',
             }}
         />
     )

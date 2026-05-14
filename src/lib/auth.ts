@@ -1,11 +1,9 @@
 import { betterAuth } from 'better-auth'
 import { prismaAdapter } from 'better-auth/adapters/prisma'
-import { PrismaClient } from '@prisma/client'
 import { nextCookies } from 'better-auth/next-js'
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-
-const prisma = new PrismaClient()
+import prisma from '@/lib/prisma'
 
 const cookieName = process.env.BETTER_COOKIE_NAME
 

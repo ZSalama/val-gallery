@@ -1,15 +1,16 @@
-Art gallery website with e-commerce functionality.
+# Valerie Anne Barber Gallery
 
-https://val-gallery.vercel.app
+Artwork gallery and e-commerce site for prints, postcards, and card sets.
 
-## Tech Stack/Languages
+Live site: https://val-gallery.vercel.app
 
-Next.js
-Vercel
-Typescript
-React
-JavaScript
-HTML
-CSS
-Tailwind CSS
-S3 bucket w/ CloudFront
+## Tech Stack
+
+- Next.js
+- React
+- TypeScript
+- Tailwind CSS
+- Prisma
+- Stripe
+- AWS S3 and CloudFront
+- Vercel

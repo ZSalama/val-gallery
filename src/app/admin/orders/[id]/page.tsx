@@ -2,16 +2,6 @@ import { requireAdmin } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { markOrderAsShipped } from './markOrderAsShipped'
 
-export async function generateStaticParams() {
-    const orders = await prisma.order.findMany({
-        select: { id: true },
-    })
-
-    return orders.map((order) => ({
-        id: order.id,
-    }))
-}
-
 // export default async function OrderPage({
 //     params,
 // }: {

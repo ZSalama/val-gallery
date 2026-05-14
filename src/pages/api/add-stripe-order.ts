@@ -1,22 +1,9 @@
-// import type { NextApiRequest, NextApiResponse } from 'next'
-
-// type ResponseData = {
-//   message: string
-// }
-
-// export default function handler(
-//   req: NextApiRequest,
-//   res: NextApiResponse<ResponseData>
-// ) {
-//   res.status(200).json({ message: 'Hello from Next.js!' })
-// }
-
 import { NextApiRequest, NextApiResponse } from 'next'
 import Stripe from 'stripe'
 import prisma from '@/lib/prisma'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-    apiVersion: '2025-01-27.acacia',
+    apiVersion: '2026-04-22.dahlia',
     timeout: 10000,
 })
 
@@ -30,33 +17,41 @@ export default async function handler(
         return res.status(400).json({ error: 'Missing sessionID parameter' })
     }
     try {
-        console.log('testStripe called')
         const session = await stripe.checkout.sessions.retrieve(
-            // 'cs_test_a1zz7KyWoLYfy6lUIUYVATdiQWcvx9QYZJhZ8dAEmRyN9ZIRUnaijmT7Fs',
             sessionID,
             {
                 expand: ['line_items'],
             }
         )
-        console.log('Session:', session)
         if (!session) {
-            console.error('Order not found')
-            return
+            return res.status(404).json({ error: 'Order not found' })
         }
         if (session.line_items) {
-            console.log('order line items: ', session.line_items)
-            console.log('order line items data: ', session.line_items.data)
+            console.info(
+                `Creating order from checkout session ${session.id}`
+            )
         } else {
-            return console.error('No line items found')
+            return res.status(400).json({ error: 'No line items found' })
         }
+        const customerEmail =
+            session.customer_email ?? session.customer_details?.email
+
+        if (!customerEmail) {
+            return res.status(200).json({
+                skipped: true,
+                reason: 'Checkout session did not include a customer email',
+            })
+        }
+
         const user = await prisma.user.findUnique({
-            where: { email: session.customer_email ?? undefined },
+            where: { email: customerEmail },
         })
         if (!user) {
-            console.error('User not found')
-            return
+            return res.status(200).json({
+                skipped: true,
+                reason: 'No account user found for checkout email',
+            })
         }
-        // console.log('User:', user.email)
         const address = await prisma.address.create({
             data: {
                 line1: session.customer_details?.address?.line1,
@@ -67,7 +62,6 @@ export default async function handler(
                 country: session.customer_details?.address?.country,
             },
         })
-        console.log('Address:', address)
 
         if (!session.line_items) {
             console.error('Line items not found on checkout session')
@@ -89,10 +83,10 @@ export default async function handler(
                 },
             },
         })
-        console.log('Order:', order)
+        console.info(`Order ${order.id} created from checkout session`)
         res.status(200).json({ session })
     } catch (error: any) {
-        console.error('Error in testStripe route:', error)
+        console.error('Error creating Stripe order:', error)
         res.status(500).json({ error: error.message })
     }
 }

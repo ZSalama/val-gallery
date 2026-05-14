@@ -10,7 +10,7 @@ const nextConfig: NextConfig = {
             },
         ],
         minimumCacheTTL: 864000, //24 hours
-        qualities: [25, 50, 75],
+        qualities: [25, 50, 75, 85],
     },
 }
 

@@ -11,25 +11,6 @@ import styles from './page.module.css'
 import prisma from '@/lib/prisma'
 import { requireAdmin } from '@/lib/auth'
 
-// model User {
-//     id            String    @id
-//     email         String    @unique
-//     name          String?
-//     emailVerified Boolean
-//     image         String?
-//     createdAt     DateTime
-//     updatedAt     DateTime
-//     sessions      Session[]
-//     accounts      Account[]
-//     isAdmin       Boolean   @default(false)
-
-//     // custom fields
-//     addresses Address[]
-//     orders    Order[]
-
-//     @@map("user")
-//   }
-
 export default async function users() {
     await requireAdmin()
     const users = await prisma.user.findMany({
@@ -37,10 +18,9 @@ export default async function users() {
             orders: true,
         },
     })
-    console.log(users)
     return (
         <div className={styles.wrapper}>
-            <h1 className={styles.title}>Products</h1>
+            <h1 className={styles.title}>Users</h1>
             <Table>
                 <TableCaption>A list of users.</TableCaption>
                 <TableHeader>

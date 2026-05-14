@@ -51,20 +51,17 @@ export default async function handler(
             .json({ error: 'Webhook signature verification failed' })
     }
 
-    // ✅ Ensure the response is always sent
-    // console.log(`✅ Received event: ${event.type}`)
     res.status(200).json({ received: true })
 
     try {
         switch (event.type) {
             case 'payment_intent.succeeded':
-                // console.log('✅ Payment succeeded:', event.data.object)
                 break
             case 'checkout.session.completed':
-                console.log('✅ Checkout session completed:', event.data.object)
-                console.log('event id: ', event.data.object.id)
+                console.info(
+                    `Checkout session completed: ${event.data.object.id}`
+                )
 
-                // Build the absolute URL using the protocol and host from the incoming request headers.
                 const protocol = req.headers['x-forwarded-proto'] || 'http'
                 const host = req.headers.host
                 const apiUrl = `${protocol}://${host}/api/add-stripe-order?sessionID=${event.data.object.id}`
@@ -73,35 +70,32 @@ export default async function handler(
                 if (!response.ok) {
                     return res
                         .status(response.status)
-                        .json({ error: 'Error calling testStripe API' })
+                        .json({ error: 'Error creating Stripe order' })
                 }
 
                 const data = await response.json()
-                console.log('testStripe response:', data)
+                console.info(
+                    `Stripe order response received: ${data.session?.id}`
+                )
 
                 break
             case 'charge.succeeded':
-                // console.log('✅ Charge succeeded:', event.data.object)
-                console.log('✅ Charge succeeded:')
+                console.info('Charge succeeded')
                 break
             case 'payment_intent.created':
-                // console.log('✅ Payment intent created:', event.data.object)
-                console.log('✅ Payment intent created:')
+                console.info('Payment intent created')
                 break
             case 'charge.updated':
-                // console.log('✅ Charge updated:', event.data.object)
-                console.log('✅ Charge updated:')
+                console.info('Charge updated')
                 break
             case 'product.created':
-                // console.log('✅ Product created:', event.data.object)
-                console.log('✅ Product created:')
+                console.info('Product created')
                 break
             case 'price.created':
-                // console.log('✅ Price created:', event.data.object)
-                console.log('✅ Price created:')
+                console.info('Price created')
                 break
             default:
-                console.warn(`⚠️ Unhandled event type: ${event.type}`)
+                console.warn(`Unhandled event type: ${event.type}`)
                 break
         }
     } catch (error: any) {

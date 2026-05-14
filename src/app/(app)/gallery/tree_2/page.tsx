@@ -1,5 +1,11 @@
 import ProductPageV from '@/components/ProductPageV/ProductPageV'
 
+export const metadata = {
+    title: 'White Trees',
+    description:
+        'White Trees by Valerie Anne Barber, available as a poster or card set.',
+}
+
 export default function Tree_2() {
     return (
         <ProductPageV
@@ -15,7 +21,7 @@ export default function Tree_2() {
                     'https://d2oeo8w8j25w98.cloudfront.net/tree_2_framed.jpg',
                 price_id_card: 'price_1R9vpvGhmoGg54MoAJKlHEEw',
                 cost_card: 10,
-                blurb: 'White Trees Lorem ipsum dolor sit amet consectetur, adipisicing elit. Soluta in eum nobis. Dolore veritatis mollitia, voluptas reprehenderit assumenda libero officiis, inventore modi necessitatibus qui aliquid quae, amet laboriosam natus nisi? Quis dolore eius sed ducimus quae minima amet quisquam vitae aperiam officiis earum, distinctio, id, veritatis excepturi ratione doloribus laudantium.',
+                blurb: 'White Trees brings a clean, quiet tree study to the gallery collection. It is available as a poster or as a 5 by 7 card set.',
             }}
         />
     )
