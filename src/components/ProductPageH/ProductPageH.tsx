@@ -3,6 +3,7 @@
 import styles from './items-h.module.css'
 import Image from 'next/image'
 import AddItemToCart from '@/components/ui/AddItemToCard'
+import ScrollReveal from '@/components/ScrollReveal/ScrollReveal'
 import { useState } from 'react'
 
 type Product = {
@@ -39,7 +40,7 @@ export default function ProductPageH({ product }: { product: Product }) {
 
     return (
         <div className={styles.gallery_wrapper}>
-            <div className={styles.image_panel}>
+            <ScrollReveal className={styles.image_panel}>
                 <Image
                     src={product.url_poster}
                     alt={product.id_poster}
@@ -49,7 +50,7 @@ export default function ProductPageH({ product }: { product: Product }) {
                     quality={85}
                     priority
                 />
-            </div>
+            </ScrollReveal>
 
             <div className={styles.description}>
                 <h1 className={styles.title}>{product.name}</h1>

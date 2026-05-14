@@ -11,7 +11,6 @@
     width: 100%;
     max-width: 46rem;
     margin: 0 auto 1.5rem;
-    animation: productImageFadeUp 700ms ease-out both;
 }
 
 .image {
@@ -66,24 +65,6 @@
 .toggleButtons button.active {
     background: #fff;
     color: #000;
-}
-
-@keyframes productImageFadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(18px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .image_panel {
-        animation: none;
-    }
 }
 
 @media screen and (min-width: 800px) {

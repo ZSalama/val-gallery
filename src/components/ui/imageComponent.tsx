@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import ScrollReveal from '@/components/ScrollReveal/ScrollReveal'
 import styles from '../../app/(app)/gallery/page.module.css'
 
 type GalleryImageLinkProps = {
@@ -20,7 +21,7 @@ export default function GalleryImageLink({
     loading = 'lazy',
 }: GalleryImageLinkProps) {
     return (
-        <div className={styles.image_wrapper}>
+        <ScrollReveal className={styles.image_wrapper}>
             <Image
                 className={styles.image}
                 src={src}
@@ -37,6 +38,6 @@ export default function GalleryImageLink({
             >
                 <div className={styles.image_overlay}></div>
             </Link>
-        </div>
+        </ScrollReveal>
     )
 }
